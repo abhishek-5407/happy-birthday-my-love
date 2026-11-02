@@ -338,16 +338,6 @@
       50%{ box-shadow: 0 0 0 8px rgba(225,29,72,0); }
     }
     .dot-pulse { animation: dotPulse 1.8s ease-in-out infinite; }
-
-    /* entrance animation for sections */
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal-section {
-      opacity: 0;
-      animation: fadeSlideUp 0.8s ease forwards;
-    }
   </style>
 </head>
 
@@ -466,7 +456,8 @@
 
       <!-- 3D Luxury Gift Box -->
       <div id="giftBoxContainer"
-        class="relative w-40 h-40 sm:w-48 sm:h-48 my-2 flex items-center justify-center animate-gift-vibe cursor-pointer group select-none"
+        onclick="openSurpriseGift()"
+        class="relative w-40 h-40 sm:w-48 sm:h-48 my-2 flex items-center justify-center animate-gift-vibe cursor-pointer group select-none touch-manipulation"
         title="Tap to open gift">
 
         <!-- Radiant glow behind gift -->
@@ -543,7 +534,8 @@
 
       <!-- Action Button -->
       <button id="openGiftBtn"
-        class="mt-4 relative group overflow-hidden px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg text-white shadow-glow-rose transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 border border-rose-300/40">
+        onclick="openSurpriseGift()"
+        class="mt-4 relative group overflow-hidden px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg text-white shadow-glow-rose transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 border border-rose-300/40 touch-manipulation">
         <span
           class="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
         <span class="flex items-center gap-3 relative z-10">
@@ -1449,7 +1441,7 @@
     <!-- ========================================== -->
     <!-- SECTION B: LOVE SHAYARI                    -->
     <!-- ========================================== -->
-    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.2s">
+    <section class="relative py-14 px-4 sm:px-6 overflow-hidden">
       <div class="max-w-lg mx-auto">
 
         <div class="flex justify-center mb-5">
@@ -1505,7 +1497,7 @@
     <!-- ========================================== -->
     <!-- SECTION C: OUR LOVE STORY TIMELINE         -->
     <!-- ========================================== -->
-    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.15s">
+    <section class="relative py-14 px-4 sm:px-6 overflow-hidden">
       <div class="max-w-xl mx-auto">
 
         <div class="flex justify-center mb-5">
@@ -1577,7 +1569,7 @@
     <!-- ========================================== -->
     <!-- SECTION D: SECRET MESSAGE (PASSWORD LOCK)  -->
     <!-- ========================================== -->
-    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.05s">
+    <section id="secretLockSection" class="relative py-14 px-4 sm:px-6 overflow-hidden">
       <div class="max-w-md mx-auto text-center">
 
         <div class="flex justify-center mb-5">
@@ -1594,23 +1586,34 @@
         </p>
 
         <!-- Lock Box -->
-        <div id="lockBox" class="glass-card rounded-3xl p-7 border border-rose-500/40 shadow-glow-rose">
-          <div class="text-5xl mb-4" id="lockIcon">🔒</div>
-          <p class="text-rose-200/80 text-sm mb-5">Password daalo aur andar aao, meri jaan 💕</p>
-          <div class="flex gap-2 mb-4">
+        <div id="lockBox" class="glass-card rounded-3xl p-6 sm:p-7 border border-rose-500/40 shadow-glow-rose">
+          <div class="text-5xl mb-3" id="lockIcon">🔒</div>
+          <p class="text-rose-200/90 text-sm mb-4">Password daalo aur andar aao, meri jaan 💕</p>
+          
+          <div class="flex gap-2 mb-3">
             <input
               id="pwInput"
-              type="password"
-              placeholder="Password yahan likho..."
+              type="text"
+              placeholder="mywife"
               autocomplete="off"
-              class="flex-1 bg-rose-950/60 border border-rose-500/40 rounded-xl px-4 py-3 text-rose-100 text-sm placeholder-rose-400/50 focus:outline-none focus:border-champagne-400/70 focus:ring-1 focus:ring-champagne-400/30 transition-all"
+              autocapitalize="off"
+              spellcheck="false"
+              class="flex-1 bg-rose-950/60 border border-rose-500/40 rounded-xl px-4 py-3 text-rose-100 text-base placeholder-rose-400/40 focus:outline-none focus:border-champagne-400/70 focus:ring-1 focus:ring-champagne-400/30 transition-all text-center tracking-wider"
             >
-            <button onclick="checkPassword()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold text-sm shadow-glow-rose active:scale-95 transition-transform touch-manipulation">
-              ✓
+            <button onclick="checkPassword()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 text-white font-bold text-sm shadow-glow-rose active:scale-95 transition-transform touch-manipulation">
+              Kholo 🔓
             </button>
           </div>
-          <p id="pwError" class="text-red-400 text-xs hidden">❌ Galat password! Dobara try karo meri jaan 😄</p>
-          <p class="text-rose-400/40 text-xs mt-3">💡 Hint: Tum kaun ho? 😊</p>
+          
+          <p id="pwError" class="text-red-400 text-xs hidden my-2 font-medium">❌ Password galat hai! "mywife" likhiye ya neeche button dabaiye 😄</p>
+          
+          <!-- One-tap unlock helper button for mobile users -->
+          <div class="mt-4 pt-3 border-t border-rose-900/40 flex flex-col items-center gap-1.5">
+            <span class="text-xs text-rose-300/70">💡 Password hai: <strong class="text-champagne-300 font-mono">mywife</strong></span>
+            <button type="button" onclick="document.getElementById('pwInput').value='mywife'; checkPassword();" class="mt-1 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-champagne-400/15 border border-champagne-400/40 text-champagne-200 text-xs font-semibold hover:bg-champagne-400/25 active:scale-95 transition-all touch-manipulation">
+              <span>✨ Tap Here to Auto-Unlock 💖</span>
+            </button>
+          </div>
         </div>
 
         <!-- Unlocked Secret Message (hidden until correct password) -->
@@ -1618,7 +1621,7 @@
           <div class="text-4xl mb-3 animate-bounce">💝</div>
           <p class="font-display text-champagne-200 text-lg mb-4">Aapne sahi password daala — Kyunki aap hi meri wife hain! 💍</p>
           <div class="space-y-3 text-rose-100/90 text-sm leading-relaxed font-sans">
-            <p>Meri pyaari jaan,</p>
+            <p class="font-script text-xl text-champagne-200">Meri pyaari jaan,</p>
             <p>
               Ye message maine sirf aapke liye chhupa ke rakha tha — kyunki kuch baatein sirf hamare beech ki hoti hain.
               Aap meri sabse pyaari dost, meri wife, meri poori duniya hain.
@@ -1641,7 +1644,7 @@
     <!-- ========================================== -->
     <!-- SECTION E: WHATSAPP REPLY BUTTON           -->
     <!-- ========================================== -->
-    <section class="relative py-10 px-4 sm:px-6 reveal-section" style="animation-delay:0.1s">
+    <section class="relative py-10 px-4 sm:px-6">
       <div class="max-w-md mx-auto text-center">
 
         <div class="flex justify-center mb-5">
@@ -1991,51 +1994,72 @@
       }, 250);
     }
 
-    function openSurpriseGift() {
-      // 1. Lift lid with 3D transform
-      giftLidGroup.style.transform = 'translateY(-65px) rotate(-14deg) scale(1.15)';
-      giftBoxContainer.classList.remove('animate-gift-vibe');
+    let giftOpened = false;
 
-      // 2. Play Audio
-      startMusic();
+    function openSurpriseGift(e) {
+      if (giftOpened) return;
+      giftOpened = true;
+      if (e && e.cancelable) e.preventDefault();
 
-      // 3. Burst colorful confetti
-      triggerConfettiBurst();
+      // 1. Lift lid with 3D transform immediately
+      const lid = document.getElementById('giftLidGroup');
+      const box = document.getElementById('giftBoxContainer');
+      if (lid) lid.style.transform = 'translateY(-70px) rotate(-15deg) scale(1.15)';
+      if (box) box.classList.remove('animate-gift-vibe');
+
+      // 2. Play Audio non-blocking
+      try { startMusic(); } catch (err) { console.log('Music start error:', err); }
+
+      // 3. Burst colorful confetti immediately
+      try { triggerConfettiBurst(); } catch (err) {}
 
       // 4. Start photo slideshow
-      startPhotoSlideshow();
+      try { startPhotoSlideshow(); } catch (err) {}
 
-      // 5. Fade out intro overlay smoothly
+      // 5. Instantly fade out overlay and show main content
+      const overlay = document.getElementById('introOverlay');
+      const main = document.getElementById('mainContent');
+
+      if (main) {
+        main.classList.remove('opacity-0');
+        main.classList.add('opacity-100');
+      }
+
+      if (overlay) {
+        overlay.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+        overlay.style.opacity = '0';
+        overlay.style.transform = 'scale(1.03)';
+        overlay.style.pointerEvents = 'none';
+      }
+
+      // 6. Complete removal from DOM tree so touch & scroll are 100% free
       setTimeout(() => {
-        introOverlay.style.opacity = '0';
-        introOverlay.style.pointerEvents = 'none';
+        if (overlay) overlay.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'instant' });
 
-        // 5. Reveal main content
-        mainContent.classList.remove('opacity-0');
-        mainContent.classList.add('opacity-100');
-
-        // Show celebratory floating toast banner
+        // Show celebratory toast
         const toast = document.getElementById('celebrationToast');
         if (toast) {
           toast.classList.remove('hidden');
           setTimeout(() => {
             toast.classList.remove('opacity-0', '-translate-y-6');
             toast.classList.add('opacity-100', 'translate-y-0');
-          }, 400);
+          }, 150);
         }
 
-        // Refresh Lucide icons in newly rendered sections
-        lucide.createIcons();
-
-        // Extra celebratory burst
-        setTimeout(() => {
-          triggerConfettiBurst();
-        }, 600);
-      }, 700);
+        try { lucide.createIcons(); } catch (e) {}
+        try { triggerConfettiBurst(); } catch (e) {}
+      }, 380);
     }
 
-    openGiftBtn.addEventListener('click', openSurpriseGift);
-    giftBoxContainer.addEventListener('click', openSurpriseGift);
+    if (openGiftBtn) {
+      openGiftBtn.addEventListener('click', openSurpriseGift);
+      openGiftBtn.addEventListener('touchend', openSurpriseGift, { passive: true });
+    }
+    if (giftBoxContainer) {
+      giftBoxContainer.addEventListener('click', openSurpriseGift);
+      giftBoxContainer.addEventListener('touchend', openSurpriseGift, { passive: true });
+    }
 
 
     // ----------------------------------------------------
@@ -2194,7 +2218,7 @@
     const ctx = canvas.getContext('2d');
 
     let hearts = [];
-    const maxHearts = 35;
+    const maxHearts = 14;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -2211,12 +2235,12 @@
       reset(x, y, isBurst = false) {
         this.x = x !== undefined ? x : Math.random() * canvas.width;
         this.y = y !== undefined ? y : canvas.height + Math.random() * 40;
-        this.size = Math.random() * 14 + 10;
-        this.speedY = isBurst ? -(Math.random() * 4 + 2) : (Math.random() * 0.9 + 0.4);
+        this.size = Math.random() * 12 + 8;
+        this.speedY = isBurst ? -(Math.random() * 4 + 2) : (Math.random() * 0.8 + 0.35);
         this.speedX = isBurst ? (Math.random() - 0.5) * 4 : 0;
-        this.opacity = isBurst ? 0.9 : (Math.random() * 0.5 + 0.2);
+        this.opacity = isBurst ? 0.9 : (Math.random() * 0.45 + 0.2);
         this.fadeSpeed = isBurst ? 0.015 : 0.002;
-        this.swing = Math.random() * 2 + 1;
+        this.swing = Math.random() * 1.8 + 0.8;
         this.swingOffset = Math.random() * 10;
         this.color = ['#fb7185', '#f43f5e', '#e11d48', '#fbcfe8', '#fef08a'][Math.floor(Math.random() * 5)];
       }
@@ -2238,15 +2262,13 @@
         ctx.save();
         ctx.globalAlpha = Math.max(0, this.opacity);
         ctx.fillStyle = this.color;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 8;
 
         ctx.translate(this.x, this.y);
         ctx.beginPath();
         const topCurveHeight = this.size * 0.3;
         ctx.moveTo(0, topCurveHeight);
 
-        // Heart Bezier Curve
+        // Heart Bezier Curve (shadow-free for 60fps mobile speed)
         ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
         ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, (this.size + topCurveHeight) / 1.5, 0, this.size);
         ctx.bezierCurveTo(0, (this.size + topCurveHeight) / 1.5, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
@@ -2264,15 +2286,14 @@
     }
 
     function spawnHeart(x, y) {
-      if (hearts.length > 70) hearts.shift();
+      if (hearts.length > 40) hearts.shift();
       hearts.push(new FloatingHeart(x, y, true));
     }
 
     // Tap/Click to spawn gentle hearts at finger position
     window.addEventListener('click', (e) => {
-      // Don't trigger if clicked on buttons or links
       if (e.target.closest('button, a, input, select')) return;
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 3; i++) {
         spawnHeart(e.clientX + (Math.random() - 0.5) * 30, e.clientY + (Math.random() - 0.5) * 30);
       }
     });
@@ -2290,7 +2311,7 @@
 
 
     // ============================================
-    // STAR SKY BACKGROUND
+    // STAR SKY BACKGROUND (Optimized for smooth mobile 60 FPS)
     // ============================================
     (function() {
       const sc = document.getElementById('starCanvas');
@@ -2303,13 +2324,14 @@
       }
       window.addEventListener('resize', resizeStar);
       resizeStar();
-      for (let i = 0; i < 130; i++) {
+      const numStars = Math.min(50, Math.floor(window.innerWidth / 10));
+      for (let i = 0; i < numStars; i++) {
         stars.push({
           x: Math.random() * sc.width,
           y: Math.random() * sc.height,
-          r: Math.random() * 1.3 + 0.2,
+          r: Math.random() * 1.2 + 0.3,
           alpha: Math.random(),
-          speed: Math.random() * 0.008 + 0.003,
+          speed: Math.random() * 0.006 + 0.002,
           dir: Math.random() > 0.5 ? 1 : -1
         });
       }
@@ -2317,12 +2339,10 @@
         sctx.clearRect(0, 0, sc.width, sc.height);
         stars.forEach(s => {
           s.alpha += s.speed * s.dir;
-          if (s.alpha > 1 || s.alpha < 0.05) s.dir *= -1;
+          if (s.alpha > 0.95 || s.alpha < 0.1) s.dir *= -1;
           sctx.save();
-          sctx.globalAlpha = Math.max(0.05, s.alpha * 0.6);
-          sctx.fillStyle = Math.random() > 0.9 ? '#fde68a' : '#ffffff';
-          sctx.shadowColor = '#ffffff';
-          sctx.shadowBlur = 4;
+          sctx.globalAlpha = Math.max(0.08, s.alpha * 0.7);
+          sctx.fillStyle = '#ffffff';
           sctx.beginPath();
           sctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
           sctx.fill();
@@ -2339,13 +2359,12 @@
     // ============================================
     function updateCountdown() {
       const now = new Date();
-      // Birthday: 3rd November of current year (or next if already passed)
       let bday = new Date(now.getFullYear(), 10, 3, 0, 0, 0); // Month 10 = November
       if (now >= bday) {
-        // Birthday is today or passed this year — show celebration
-        document.getElementById('countdownWrapper').classList.add('hidden');
-        document.getElementById('birthdayArrived').classList.remove('hidden');
-        // Fire celebration confetti
+        const wrap = document.getElementById('countdownWrapper');
+        const arrived = document.getElementById('birthdayArrived');
+        if (wrap) wrap.classList.add('hidden');
+        if (arrived) arrived.classList.remove('hidden');
         confetti({ particleCount: 150, spread: 120, origin: { y: 0.6 }, colors: ['#e11d48','#fb7185','#fbbf24','#ffffff'] });
         return;
       }
@@ -2354,51 +2373,69 @@
       const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const secs  = Math.floor((diff % (1000 * 60)) / 1000);
-      document.getElementById('cdDays').textContent  = String(days).padStart(2,'0');
-      document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
-      document.getElementById('cdMins').textContent  = String(mins).padStart(2,'0');
-      document.getElementById('cdSecs').textContent  = String(secs).padStart(2,'0');
+      const dEl = document.getElementById('cdDays');
+      const hEl = document.getElementById('cdHours');
+      const mEl = document.getElementById('cdMins');
+      const sEl = document.getElementById('cdSecs');
+      if (dEl) dEl.textContent = String(days).padStart(2,'0');
+      if (hEl) hEl.textContent = String(hours).padStart(2,'0');
+      if (mEl) mEl.textContent = String(mins).padStart(2,'0');
+      if (sEl) sEl.textContent = String(secs).padStart(2,'0');
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
 
     // ============================================
-    // PASSWORD LOCK — Secret Message
+    // PASSWORD LOCK — Secret Message (Robust Multi-Match)
     // ============================================
-    const CORRECT_PASSWORD = 'mywife';
-
     function checkPassword() {
       const input = document.getElementById('pwInput');
       const errEl = document.getElementById('pwError');
-      const val = input.value.trim().toLowerCase();
-      if (val === CORRECT_PASSWORD) {
-        document.getElementById('lockBox').classList.add('hidden');
+      if (!input) return;
+      const raw = input.value || '';
+      const cleanVal = raw.trim().toLowerCase().replace(/[\s\-_.]/g, '');
+      const validPasswords = ['mywife', 'wife', 'merijaan', 'meri-jaan'];
+
+      if (validPasswords.includes(cleanVal)) {
+        const lockBox = document.getElementById('lockBox');
         const msg = document.getElementById('secretMsg');
-        msg.classList.remove('hidden');
-        // Celebration burst
-        confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 }, colors: ['#e11d48','#fbbf24','#ffffff','#fb7185'] });
-        playWishChime();
+        if (lockBox) lockBox.classList.add('hidden');
+        if (msg) msg.classList.remove('hidden');
+        if (errEl) errEl.classList.add('hidden');
+
+        // Romantic Celebration burst
+        confetti({
+          particleCount: 120,
+          spread: 90,
+          origin: { y: 0.6 },
+          colors: ['#e11d48', '#fbbf24', '#ffffff', '#fb7185']
+        });
+        try { playWishChime(); } catch(e) {}
       } else {
-        errEl.classList.remove('hidden');
+        if (errEl) errEl.classList.remove('hidden');
         input.classList.add('shake-anim');
         setTimeout(() => {
           input.classList.remove('shake-anim');
-          errEl.classList.add('hidden');
-          input.value = '';
-        }, 1500);
+        }, 1200);
       }
     }
 
     // Allow Enter key to submit password
-    document.getElementById('pwInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') checkPassword();
-    });
+    const pwInputEl = document.getElementById('pwInput');
+    if (pwInputEl) {
+      pwInputEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') checkPassword();
+      });
+    }
 
     function relockMessage() {
-      document.getElementById('secretMsg').classList.add('hidden');
-      document.getElementById('lockBox').classList.remove('hidden');
-      document.getElementById('pwInput').value = '';
+      const msg = document.getElementById('secretMsg');
+      const lockBox = document.getElementById('lockBox');
+      const input = document.getElementById('pwInput');
+      if (msg) msg.classList.add('hidden');
+      if (lockBox) lockBox.classList.remove('hidden');
+      if (input) input.value = '';
     }
 
 
@@ -2406,31 +2443,9 @@
     // WHATSAPP BUTTON — Open with pre-filled message from Wife to Husband
     // ============================================
     function openWhatsApp(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
       const msg = encodeURIComponent('Aww thank you so much meri jaan! 😭❤️ Ye surprise dekh kar mera dil khush ho gaya! Aap sach mein duniya ke sabse acche husband ho... I love you so much forever! 💍✨🌹');
       window.open('https://wa.me/917518595407?text=' + msg, '_blank');
-    }
-
-
-    // ============================================
-    // REVEAL SECTIONS ON SCROLL (Intersection Observer)
-    // ============================================
-    const revealEls = document.querySelectorAll('.reveal-section');
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationPlayState = 'running';
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      revealEls.forEach(el => {
-        el.style.animationPlayState = 'paused';
-        io.observe(el);
-      });
-    } else {
-      revealEls.forEach(el => el.style.opacity = '1');
     }
 
   </script>
