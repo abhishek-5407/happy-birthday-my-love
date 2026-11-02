@@ -10,11 +10,11 @@
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cinzel (Display), Playfair Display (Romantic Clean Serif), Plus Jakarta Sans (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -60,7 +60,7 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             display: ['"Cinzel"', 'serif'],
-            script: ['"Dancing Script"', 'cursive'],
+            script: ['"Playfair Display"', 'Georgia', 'serif'],
           },
           boxShadow: {
             'glow-rose': '0 0 35px -5px rgba(225, 29, 72, 0.45)',
@@ -80,6 +80,13 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       touch-action: manipulation;
+    }
+
+    /* Romantic Clean Serif (Easy to read, elegant poetic style) */
+    .font-script {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      letter-spacing: 0.01em;
     }
 
     /* Glassmorphism */
@@ -342,6 +349,20 @@
 </head>
 
 <body class="min-h-screen relative selection:bg-rose-600 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- ROMANTIC COUPLE BACKGROUND WALLPAPER       -->
+  <!-- ========================================== -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
+    <img 
+      src="./assets/couple.jpg" 
+      alt="Our Romantic Memories" 
+      class="w-full h-full object-cover object-center scale-105 filter blur-[2.5px] brightness-[0.25] contrast-[1.1] saturate-[1.2] opacity-35"
+    />
+    <!-- Romantic Deep Rose Vignette Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0c0409]/85 via-[#150410]/80 to-[#0c0409]/90"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at center, transparent 35%, #0c0409 95%);"></div>
+  </div>
 
   <!-- ========================================== -->
   <!-- BACKGROUND FLOATING HEARTS CANVAS -->
@@ -1327,17 +1348,17 @@
             <div
               class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
               <video src="./assets/gift1.mp4"
-                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
-                muted preload="metadata" playsinline></video>
+                class="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity pointer-events-none"
+                autoplay loop muted playsinline preload="auto"></video>
               <!-- Play overlay -->
-              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/20 group-hover:bg-black/10 transition-colors">
                 <div
-                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30 backdrop-blur-sm">
                   <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 </div>
-                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+                <span class="text-white/80 text-xs font-semibold tracking-wide drop-shadow-md">TAP TO PLAY (AWAAZ KE SATH) 🔊</span>
               </div>
             </div>
             <!-- Card Info -->
@@ -1353,16 +1374,16 @@
             <div
               class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
               <video src="./assets/gift2.mp4"
-                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
-                muted preload="metadata" playsinline></video>
-              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                class="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity pointer-events-none"
+                autoplay loop muted playsinline preload="auto"></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/20 group-hover:bg-black/10 transition-colors">
                 <div
-                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30 backdrop-blur-sm">
                   <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 </div>
-                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+                <span class="text-white/80 text-xs font-semibold tracking-wide drop-shadow-md">TAP TO PLAY (AWAAZ KE SATH) 🔊</span>
               </div>
             </div>
             <div class="p-4">
@@ -1377,16 +1398,16 @@
             <div
               class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
               <video src="./assets/gift3.mp4"
-                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
-                muted preload="metadata" playsinline></video>
-              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                class="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity pointer-events-none"
+                autoplay loop muted playsinline preload="auto"></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/20 group-hover:bg-black/10 transition-colors">
                 <div
-                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30 backdrop-blur-sm">
                   <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 </div>
-                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+                <span class="text-white/80 text-xs font-semibold tracking-wide drop-shadow-md">TAP TO PLAY (AWAAZ KE SATH) 🔊</span>
               </div>
             </div>
             <div class="p-4">
@@ -1401,16 +1422,16 @@
             <div
               class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
               <video src="./assets/gift4.mp4"
-                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
-                muted preload="metadata" playsinline></video>
-              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                class="w-full h-full object-cover opacity-75 group-hover:opacity-95 transition-opacity pointer-events-none"
+                autoplay loop muted playsinline preload="auto"></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/20 group-hover:bg-black/10 transition-colors">
                 <div
-                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30 backdrop-blur-sm">
                   <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
                     <polygon points="5,3 19,12 5,21" />
                   </svg>
                 </div>
-                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+                <span class="text-white/80 text-xs font-semibold tracking-wide drop-shadow-md">TAP TO PLAY (AWAAZ KE SATH) 🔊</span>
               </div>
             </div>
             <div class="p-4">
