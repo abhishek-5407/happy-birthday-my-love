@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday, My Love ❤️ | 3rd November</title>
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fff1f2',
+              100: '#ffe4e6',
+              200: '#fecdd3',
+              400: '#fb7185',
+              500: '#f43f5e',
+              600: '#e11d48',
+              700: '#be123c',
+              800: '#9f1239',
+              900: '#881337',
+              950: '#4c0519',
+            },
+            champagne: {
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              gold: '#d4af37',
+              light: '#fdf6e2',
+            },
+            night: {
+              900: '#18181b',
+              950: '#0c0409',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Cinzel"', 'serif'],
+            script: ['"Dancing Script"', 'cursive'],
+          },
+          boxShadow: {
+            'glow-rose': '0 0 35px -5px rgba(225, 29, 72, 0.45)',
+            'glow-gold': '0 0 30px -5px rgba(212, 175, 55, 0.45)',
+            'glass': '0 8px 32px 0 rgba(225, 29, 72, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Utilities & Animations */
+    body {
+      background-color: #0c0409;
+      color: #fff1f2;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      touch-action: manipulation;
+    }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(24, 10, 18, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(251, 113, 133, 0.22);
+    }
+
+    .glass-card-bright {
+      background: rgba(255, 241, 242, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(253, 211, 77, 0.3);
+    }
+
+    /* Gift Box 3D Shake */
+    @keyframes gentleVibe {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+
+      20% {
+        transform: translateY(-3px) rotate(-2deg) scale(1.02);
+      }
+
+      40% {
+        transform: translateY(2px) rotate(2deg) scale(1.02);
+      }
+
+      60% {
+        transform: translateY(-2px) rotate(-1deg) scale(1.01);
+      }
+
+      80% {
+        transform: translateY(1px) rotate(1deg) scale(1.01);
+      }
+    }
+
+    .animate-gift-vibe {
+      animation: gentleVibe 2.8s ease-in-out infinite;
+    }
+
+    /* Flame Flickering */
+    @keyframes flameFlicker {
+
+      0%,
+      100% {
+        transform: scale(1) rotate(-1deg);
+        filter: drop-shadow(0 0 10px #f59e0b) drop-shadow(0 0 20px #e11d48);
+      }
+
+      25% {
+        transform: scale(1.08, 0.95) rotate(1deg);
+        filter: drop-shadow(0 0 14px #fbbf24) drop-shadow(0 0 26px #f43f5e);
+      }
+
+      50% {
+        transform: scale(0.96, 1.05) rotate(-2deg);
+        filter: drop-shadow(0 0 11px #f59e0b) drop-shadow(0 0 18px #e11d48);
+      }
+
+      75% {
+        transform: scale(1.04, 0.98) rotate(1.5deg);
+        filter: drop-shadow(0 0 16px #fcd34d) drop-shadow(0 0 24px #be123c);
+      }
+    }
+
+    .flame-active {
+      animation: flameFlicker 1.1s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    /* Candle Smoke Effect */
+    @keyframes smokeRise {
+      0% {
+        opacity: 0.9;
+        transform: translateY(0) scale(0.6) rotate(0deg);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: translateY(-25px) scale(1.2) rotate(12deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.8) rotate(-15deg);
+      }
+    }
+
+    .smoke-puff {
+      animation: smokeRise 1.6s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* 3D Flip Card System */
+    .flip-card {
+      perspective: 1200px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 1.25rem;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Soundwave Equalizer Bars */
+    @keyframes soundwave {
+
+      0%,
+      100% {
+        height: 4px;
+      }
+
+      50% {
+        height: 18px;
+      }
+    }
+
+    .bar-1 {
+      animation: soundwave 1s ease-in-out infinite;
+    }
+
+    .bar-2 {
+      animation: soundwave 1s ease-in-out 0.2s infinite;
+    }
+
+    .bar-3 {
+      animation: soundwave 1s ease-in-out 0.4s infinite;
+    }
+
+    .bar-4 {
+      animation: soundwave 1s ease-in-out 0.15s infinite;
+    }
+
+    .paused-bar {
+      animation-play-state: paused !important;
+      height: 4px !important;
+    }
+
+    /* Shimmering Text Effect */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fff1f2 0%, #fde68a 50%, #fb7185 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .rose-gradient-text {
+      background: linear-gradient(135deg, #ffe4e6 0%, #fb7185 45%, #e11d48 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0c0409;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #e11d48;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen relative selection:bg-rose-600 selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- BACKGROUND FLOATING HEARTS CANVAS -->
+  <!-- ========================================== -->
+  <canvas id="heartsCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Background Ambient Glow Orbs -->
+  <div
+    class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-rose-700/20 blur-[130px] pointer-events-none z-0">
+  </div>
+  <div
+    class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-champagne-500/15 blur-[140px] pointer-events-none z-0">
+  </div>
+  <div
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-rose-950/30 blur-[160px] pointer-events-none z-0">
+  </div>
+
+  <!-- Audio Player Elements (Plays user's romantic song) -->
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="./assets/romantic-song.mp3" type="audio/mp3">
+    <source src="./romantic-song.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- ========================================== -->
+  <!-- FLOATING CELEBRATION TOAST BANNER (Shows after opening) -->
+  <!-- ========================================== -->
+  <div id="celebrationToast"
+    class="fixed top-4 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-40 hidden opacity-0 -translate-y-6 transition-all duration-700 pointer-events-none">
+    <div
+      class="px-5 py-2.5 rounded-full glass-card border border-champagne-400/50 shadow-glow-gold flex items-center justify-center gap-2.5 text-center backdrop-blur-xl">
+      <span class="text-base sm:text-lg animate-bounce">🎉</span>
+      <span class="text-xs sm:text-sm font-semibold text-champagne-200">
+        Happy Birthday Meri Jaan & My Beloved Wife! 💍❤️ Celebrating You Today & Forever! ✨
+      </span>
+      <span class="text-base sm:text-lg animate-bounce">🎂</span>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FLOATING MUSIC PLAYER WIDGET -->
+  <!-- ========================================== -->
+  <aside id="musicWidget"
+    class="fixed bottom-6 right-5 z-40 flex items-center gap-3 py-2 px-3.5 rounded-full glass-card border border-rose-500/30 shadow-glow-rose transition-all duration-300 hover:scale-105">
+    <button id="toggleMusicBtn" class="flex items-center gap-2.5 focus:outline-none group"
+      aria-label="Toggle Romantic Music">
+      <!-- Equalizer Bars -->
+      <div id="soundBars" class="flex items-end gap-1 h-5 w-5 justify-center">
+        <span class="w-1 bg-rose-400 rounded-full paused-bar bar-1"></span>
+        <span class="w-1 bg-champagne-300 rounded-full paused-bar bar-2"></span>
+        <span class="w-1 bg-rose-500 rounded-full paused-bar bar-3"></span>
+        <span class="w-1 bg-amber-400 rounded-full paused-bar bar-4"></span>
+      </div>
+
+      <div class="flex flex-col text-left">
+        <span class="text-[10px] uppercase tracking-wider text-rose-300/80 font-medium">Romantic Song</span>
+        <span id="musicStatusText" class="text-xs font-semibold text-rose-100 flex items-center gap-1">
+          <span id="musicPlayIcon">▶ Tap to Play</span>
+        </span>
+      </div>
+    </button>
+  </aside>
+
+
+  <!-- ========================================== -->
+  <!-- STAGE 1: THE SURPRISE GIFT BOX & ANIMATED WELCOME (INTRO SCREEN) -->
+  <!-- ========================================== -->
+  <section id="introOverlay"
+    class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-[#160611] via-[#0d030a] to-[#080206] transition-all duration-1000 ease-out overflow-y-auto">
+    <div class="max-w-lg w-full mx-auto flex flex-col items-center text-center relative z-10 py-6">
+
+      <!-- Romantic Crown / Sparkle Badge -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/50 text-champagne-300 text-xs sm:text-sm tracking-wide mb-4 shadow-glow-gold backdrop-blur-md animate-pulse">
+        <i data-lucide="crown" class="w-4 h-4 text-champagne-400"></i>
+        <span>Special 3rd November Delivery • For The Queen Of My Heart 👑</span>
+      </div>
+
+      <!-- Animated Romantic Wish Headline for Meri Jaan & My Wife -->
+      <h1 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-1">
+        <span class="gold-gradient-text drop-shadow-[0_2px_15px_rgba(251,191,36,0.3)]">Happy Birthday,</span>
+        <span
+          class="font-script text-4xl sm:text-6xl text-rose-400 block mt-0.5 drop-shadow-[0_2px_20px_rgba(244,63,94,0.7)]">
+          Meri Jaan ❤️
+        </span>
+      </h1>
+
+      <!-- Wife and Soulmate Romantic Tag -->
+      <div
+        class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-gradient-to-r from-rose-900/60 to-rose-950/80 border border-rose-400/40 text-rose-100 text-xs sm:text-sm font-semibold tracking-wide my-2 shadow-glow-rose">
+        <span>🌹 My Beautiful Wife 💍 My Soulmate & Whole World ✨</span>
+      </div>
+
+      <!-- Animated Love Note Card -->
+      <div
+        class="w-full glass-card p-4 sm:p-5 rounded-2xl border border-rose-400/30 my-3 text-rose-100 shadow-glass text-center backdrop-blur-xl">
+        <p class="font-script text-2xl sm:text-3xl text-champagne-200 font-bold mb-1">
+          "To my dearest jaan, meri pyaari wife... 💖"
+        </p>
+        <p class="text-xs sm:text-sm text-rose-100/90 leading-relaxed font-light">
+          Aapke aane se meri zindagi khushiyon aur sukoon se bhar gayi hai. Aaj ka din aapka hai, aur mai har pal aapke
+          chehre par aisi hi pyaari muskaan dekhna chahta hoon. Wishing you endless love, happiness, and all the joy in
+          the universe! 🎂✨
+        </p>
+      </div>
+
+      <!-- Clear Click Callout Pointer -->
+      <div
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-950/90 border border-champagne-400/50 text-champagne-300 text-xs sm:text-sm font-semibold mb-2 shadow-glow-gold animate-bounce">
+        <span>👆 Box par ya Button par tap karein 🎁</span>
+      </div>
+
+      <!-- 3D Luxury Gift Box -->
+      <div id="giftBoxContainer"
+        class="relative w-40 h-40 sm:w-48 sm:h-48 my-2 flex items-center justify-center animate-gift-vibe cursor-pointer group select-none"
+        title="Tap to open gift">
+
+        <!-- Radiant glow behind gift -->
+        <div
+          class="absolute inset-0 rounded-full bg-gradient-to-tr from-rose-600/35 via-champagne-400/25 to-rose-400/35 blur-2xl group-hover:scale-125 transition-transform duration-500">
+        </div>
+
+        <!-- 3D Styled SVG Gift Box -->
+        <svg class="w-full h-full drop-shadow-[0_15px_25px_rgba(225,29,72,0.45)]" viewBox="0 0 200 200" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <!-- Definitions for luxury gradients -->
+          <defs>
+            <linearGradient id="boxGrad" x1="20" y1="70" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#be123c" />
+              <stop offset="0.5" stop-color="#e11d48" />
+              <stop offset="1" stop-color="#881337" />
+            </linearGradient>
+            <linearGradient id="lidGrad" x1="15" y1="50" x2="185" y2="85" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fb7185" />
+              <stop offset="0.5" stop-color="#e11d48" />
+              <stop offset="1" stop-color="#9f1239" />
+            </linearGradient>
+            <linearGradient id="goldRibbon" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fef3c7" />
+              <stop offset="0.4" stop-color="#fbbf24" />
+              <stop offset="0.8" stop-color="#d97706" />
+              <stop offset="1" stop-color="#fef08a" />
+            </linearGradient>
+            <filter id="goldShine" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#f59e0b" flood-opacity="0.6" />
+            </filter>
+          </defs>
+
+          <!-- Gift Box Body -->
+          <rect id="giftBody" x="35" y="75" width="130" height="100" rx="14" fill="url(#boxGrad)"
+            stroke="rgba(255,241,242,0.2)" stroke-width="1.5" />
+
+          <!-- Vertical Ribbon Body -->
+          <rect x="88" y="75" width="24" height="100" fill="url(#goldRibbon)" filter="url(#goldShine)" />
+
+          <!-- Horizontal Ribbon Body -->
+          <rect x="35" y="115" width="130" height="20" fill="url(#goldRibbon)" opacity="0.95"
+            filter="url(#goldShine)" />
+
+          <!-- Box Lid Group (Animates on open) -->
+          <g id="giftLidGroup" class="transition-transform duration-700 ease-out origin-center">
+            <!-- Box Lid -->
+            <rect x="25" y="52" width="150" height="26" rx="7" fill="url(#lidGrad)" stroke="rgba(255,255,255,0.3)"
+              stroke-width="1.5" />
+            <!-- Lid Vertical Ribbon -->
+            <rect x="88" y="52" width="24" height="26" fill="url(#goldRibbon)" />
+
+            <!-- Ribbon Bow Loops -->
+            <!-- Left loop -->
+            <path d="M100 52 C75 25, 45 35, 65 52 C80 62, 95 54, 100 52 Z" fill="url(#goldRibbon)"
+              filter="url(#goldShine)" />
+            <!-- Right loop -->
+            <path d="M100 52 C125 25, 155 35, 135 52 C120 62, 105 54, 100 52 Z" fill="url(#goldRibbon)"
+              filter="url(#goldShine)" />
+            <!-- Bow Center Knot -->
+            <ellipse cx="100" cy="52" rx="9" ry="7" fill="#fef08a" stroke="#d97706" stroke-width="1.5" />
+            <!-- Hanging ribbons -->
+            <path d="M96 56 Q85 70 78 80" stroke="url(#goldRibbon)" stroke-width="4" stroke-linecap="round" />
+            <path d="M104 56 Q115 70 122 80" stroke="url(#goldRibbon)" stroke-width="4" stroke-linecap="round" />
+          </g>
+        </svg>
+
+        <!-- Pulsing Floating Heart Badge -->
+        <div
+          class="absolute -top-3 -right-2 bg-gradient-to-r from-rose-500 to-rose-600 text-white p-2.5 rounded-full shadow-lg border-2 border-white/30 animate-pulse">
+          <i data-lucide="heart" class="w-5 h-5 fill-white"></i>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button id="openGiftBtn"
+        class="mt-4 relative group overflow-hidden px-8 py-3.5 sm:py-4 rounded-full font-bold text-base sm:text-lg text-white shadow-glow-rose transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 border border-rose-300/40">
+        <span
+          class="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></span>
+        <span class="flex items-center gap-3 relative z-10">
+          <span>👆 Tap to Open Your Surprise, Meri Jaan</span>
+          <span class="text-xl">🎁</span>
+        </span>
+      </button>
+
+      <p class="text-xs text-champagne-300/90 mt-3 tracking-wide font-medium flex items-center justify-center gap-1.5">
+        <i data-lucide="music" class="w-3.5 h-3.5 text-rose-400"></i>
+        <span>Tap here to start our romantic song & see our memories 🎵</span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- MAIN SURPRISE CONTENT CONTAINER -->
+  <!-- ========================================== -->
+  <main id="mainContent"
+    class="opacity-0 transition-opacity duration-1000 relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 space-y-20 md:space-y-28">
+
+    <!-- ========================================== -->
+    <!-- STAGE 2: HERO & PHOTO SHOWCASE -->
+    <!-- ========================================== -->
+    <section id="heroSection" class="text-center pt-4 sm:pt-10 flex flex-col items-center">
+
+      <!-- Royal Badge -->
+      <div
+        class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-card border border-champagne-gold/40 text-champagne-300 text-xs sm:text-sm font-medium tracking-widest uppercase mb-5 shadow-glow-gold">
+        <i data-lucide="crown" class="w-4 h-4 text-champagne-400"></i>
+        <span>My Queen • Meri Jaan's Birthday 👑💍</span>
+        <i data-lucide="sparkle" class="w-4 h-4 text-champagne-400"></i>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-3">
+        <span class="gold-gradient-text drop-shadow-[0_4px_25px_rgba(251,191,36,0.3)]">Happy Birthday,</span>
+        <br class="hidden sm:inline">
+        <span
+          class="font-script text-5xl sm:text-7xl md:text-8xl text-rose-500 block sm:inline mt-1 sm:mt-0 drop-shadow-[0_4px_30px_rgba(244,63,94,0.5)]">Meri
+          Jaan ❤️</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-rose-200/90 text-sm sm:text-lg font-light tracking-wide max-w-xl mx-auto mb-10">
+        <span class="font-semibold text-champagne-300">My Beautiful Wife & Soulmate 💍</span> — 3rd November,
+        Celebrating You Every Second ✨
+      </p>
+
+      <!-- Polaroid-Style Glowing Card with Multi-Photo Gallery -->
+      <div class="relative w-full max-w-sm sm:max-w-md mx-auto group">
+
+        <!-- Ambient Backlight -->
+        <div
+          class="absolute -inset-2 bg-gradient-to-r from-rose-600 via-champagne-500 to-rose-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-65 transition duration-700">
+        </div>
+
+        <!-- Polaroid Card Wrapper -->
+        <div
+          class="relative bg-gradient-to-b from-stone-100 to-rose-50/90 text-stone-900 p-4 sm:p-5 pb-6 rounded-2xl shadow-2xl border-4 border-white/90 transform transition duration-500 hover:-rotate-1 hover:scale-[1.01]">
+
+          <!-- Cute Washi Tape Effect on Top -->
+          <div
+            class="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-6 bg-rose-200/80 backdrop-blur-sm border-t border-b border-rose-300/70 rotate-[-1deg] shadow-sm flex items-center justify-center">
+            <span class="text-[9px] tracking-widest text-rose-700 font-bold uppercase">FOREVER & ALWAYS</span>
+          </div>
+
+          <!-- Polaroid Photo Container (Tap to switch photo) -->
+          <div
+            class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-rose-950/20 shadow-inner cursor-pointer select-none"
+            onclick="switchPhoto((currentPhotoIndex + 1) % photos.length)">
+            <img id="polaroidImg" src="./assets/couple.jpg" alt="Our Beautiful Moments"
+              class="w-full h-full object-cover object-center transition-all duration-700 ease-in-out transform hover:scale-105"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1000&auto=format&fit=crop';" />
+
+            <!-- Clear Tap Indicator Pill over Photo -->
+            <div
+              class="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/65 backdrop-blur-md border border-white/30 text-[10px] sm:text-xs text-champagne-200 font-bold shadow-lg flex items-center gap-1.5 animate-pulse">
+              <span>👆 Photo tap karke agla photo dekhein 📸</span>
+            </div>
+
+            <!-- Left Arrow Button for Mobile -->
+            <button
+              onclick="event.stopPropagation(); switchPhoto((currentPhotoIndex - 1 + photos.length) % photos.length)"
+              class="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center border border-white/30 backdrop-blur-md shadow-md active:scale-90 transition-transform z-10"
+              aria-label="Previous Photo">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Right Arrow Button for Mobile -->
+            <button onclick="event.stopPropagation(); switchPhoto((currentPhotoIndex + 1) % photos.length)"
+              class="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center border border-white/30 backdrop-blur-md shadow-md active:scale-90 transition-transform z-10"
+              aria-label="Next Photo">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Subtle Gradient Overlay at Photo Bottom -->
+            <div
+              class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/50 to-transparent pointer-events-none">
+            </div>
+
+            <!-- Quick Memory Slider Tabs -->
+            <div
+              class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full z-10 border border-white/20">
+              <button onclick="event.stopPropagation(); switchPhoto(0)"
+                class="photo-dot w-2.5 h-2.5 rounded-full bg-white transition-all scale-125"
+                title="Our Selfie"></button>
+              <button onclick="event.stopPropagation(); switchPhoto(1)"
+                class="photo-dot w-2.5 h-2.5 rounded-full bg-white/40 transition-all" title="Holding Hands"></button>
+              <button onclick="event.stopPropagation(); switchPhoto(2)"
+                class="photo-dot w-2.5 h-2.5 rounded-full bg-white/40 transition-all" title="Mirror Selfie"></button>
+            </div>
+          </div>
+
+          <!-- Polaroid Handwritten Caption -->
+          <div class="mt-4 px-2 text-center">
+            <p id="polaroidCaption"
+              class="font-script text-2xl sm:text-3xl text-rose-900 font-bold leading-snug transition-all duration-300">
+              "My favorite place in all the world is right next to you 💫"
+            </p>
+            <div class="mt-2 flex items-center justify-center gap-2 text-stone-500 text-xs font-medium">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-500"></i>
+              <span id="photoCounter">Memory 1 of 3 (Tap photo or arrows)</span>
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-500"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- STAGE 3: INTERACTIVE BIRTHDAY CAKE & WISH -->
+    <!-- ========================================== -->
+    <section id="cakeSection" class="flex flex-col items-center text-center px-2">
+
+      <!-- Section Tag -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-rose-500/30 text-rose-300 text-xs sm:text-sm font-medium mb-3 shadow-glass">
+        <i data-lucide="cake" class="w-4 h-4 text-rose-400"></i>
+        <span>Time For A Wish With My Wife</span>
+      </div>
+
+      <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mb-1">
+        Make A Wish, My Beautiful Wife 🎂
+      </h2>
+
+      <!-- Mobile Clear Tap Indicator Callout -->
+      <div
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/50 text-champagne-300 text-xs sm:text-sm font-semibold mb-6 shadow-glow-gold animate-bounce">
+        <span class="text-base">👆</span>
+        <span>Candle ki flame par tap karo aur wish mango! 🕯️</span>
+      </div>
+
+      <!-- Main Stage Container: Couple Picture in Background + Cake in Foreground -->
+      <div
+        class="relative w-full max-w-sm sm:max-w-md mx-auto rounded-3xl p-3 sm:p-5 glass-card border border-rose-400/40 shadow-2xl overflow-hidden group">
+
+        <!-- Radiant ambient glow -->
+        <div class="absolute -top-10 -right-10 w-44 h-44 bg-rose-600/30 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div
+          class="absolute -bottom-10 -left-10 w-44 h-44 bg-champagne-500/25 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <!-- 1. Couple Picture in Background (Sath wali photo) -->
+        <div
+          class="relative w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-white/20 shadow-inner select-none">
+          <img src="./assets/couple.jpg" alt="Celebrating Together"
+            class="w-full h-full object-cover filter brightness-[0.92] contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+            style="object-position: center 35%;" />
+          <!-- Romantic gradient overlay at bottom so cake merges seamlessly with the photo -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#140610] via-[#140610]/60 to-transparent"></div>
+
+          <!-- Romantic badge on the couple photo -->
+          <div
+            class="absolute top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/65 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs text-rose-200 font-medium whitespace-nowrap shadow-md flex items-center gap-1.5">
+            <i data-lucide="heart" class="w-3 h-3 fill-rose-500 text-rose-500"></i>
+            <span>Celebrating Together Forever 💍</span>
+          </div>
+        </div>
+
+        <!-- 2. The Interactive Birthday Cake positioned in front (overlapping the photo) -->
+        <div class="relative -mt-24 sm:-mt-28 flex flex-col items-center z-10 select-none">
+
+          <!-- Floating Tap Indicator Pointer directly over candle -->
+          <div id="candleTapHint" class="mb-1 flex flex-col items-center animate-bounce cursor-pointer"
+            onclick="blowCandle()">
+            <span
+              class="px-3.5 py-1 rounded-full bg-gradient-to-r from-rose-600 via-amber-600 to-rose-600 text-white text-[11px] sm:text-xs font-bold shadow-glow-gold flex items-center gap-1.5 border border-white/40">
+              <span>👆 Yahan Tap Karo!</span>
+              <span class="animate-pulse">✨</span>
+            </span>
+            <div class="w-2.5 h-2.5 bg-amber-500 rotate-45 -mt-1"></div>
+          </div>
+
+          <!-- Digital Birthday Cake Artwork -->
+          <div class="relative w-64 sm:w-72 h-56 sm:h-60 flex items-center justify-center cursor-pointer"
+            onclick="blowCandle()" title="Tap to blow candle">
+
+            <!-- Ambient Floor Reflection -->
+            <div class="absolute bottom-2 w-56 h-8 bg-rose-500/30 rounded-full blur-xl"></div>
+
+            <!-- SVG Cake Illustration -->
+            <svg class="w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]" viewBox="0 0 240 240" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="cakeBaseGrad" x1="48" y1="138" x2="192" y2="208" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#e11d48" />
+                  <stop offset="0.5" stop-color="#be123c" />
+                  <stop offset="1" stop-color="#881337" />
+                </linearGradient>
+                <linearGradient id="cakeTopGrad" x1="68" y1="100" x2="172" y2="154" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#f43f5e" />
+                  <stop offset="0.6" stop-color="#be123c" />
+                  <stop offset="1" stop-color="#9f1239" />
+                </linearGradient>
+                <linearGradient id="goldPlate" x1="30" y1="200" x2="210" y2="215" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fde047" />
+                  <stop offset="0.5" stop-color="#d4af37" />
+                  <stop offset="1" stop-color="#a16207" />
+                </linearGradient>
+                <radialGradient id="flameAura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.95" />
+                  <stop offset="60%" stop-color="#f43f5e" stop-opacity="0.5" />
+                  <stop offset="100%" stop-color="#e11d48" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="outerFlameGrad" x1="120" y1="18" x2="120" y2="48" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fef08a" />
+                  <stop offset="0.35" stop-color="#f59e0b" />
+                  <stop offset="0.8" stop-color="#e11d48" />
+                  <stop offset="1" stop-color="#9f1239" />
+                </linearGradient>
+                <filter id="cakeTextGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.8" />
+                </filter>
+              </defs>
+
+              <!-- Cake Plate / Stand -->
+              <ellipse cx="120" cy="210" rx="94" ry="14" fill="url(#goldPlate)" stroke="#fef08a" stroke-width="1.5" />
+              <ellipse cx="120" cy="207" rx="88" ry="10" fill="#fff1f2" />
+
+              <!-- Cake Bottom Tier -->
+              <path
+                d="M46 150 C46 140 54 136 120 136 C186 136 194 140 194 150 L194 196 C194 206 186 210 120 210 C54 210 46 206 46 196 Z"
+                fill="url(#cakeBaseGrad)" />
+              <!-- Strawberry Cream Dripping Bottom Tier -->
+              <path
+                d="M46 150 Q56 168 66 150 Q76 172 88 150 Q100 174 112 150 Q126 170 138 150 Q150 172 162 150 Q174 170 186 150 Q192 160 194 150 C194 140 186 136 120 136 C54 136 46 140 46 150 Z"
+                fill="#fb7185" />
+
+              <!-- Cake Top Tier -->
+              <path
+                d="M66 108 C66 100 74 96 120 96 C166 96 174 100 174 108 L174 144 C174 150 166 154 120 154 C74 154 66 150 66 144 Z"
+                fill="url(#cakeTopGrad)" />
+              <!-- Vanilla White Cream Top Tier -->
+              <path
+                d="M66 108 Q76 124 86 108 Q96 126 106 108 Q118 124 128 108 Q138 124 148 108 Q158 122 168 108 Q172 116 174 108 C174 100 166 96 120 96 C74 96 66 100 66 108 Z"
+                fill="#fff1f2" />
+
+              <!-- Sugar Pearls on Cake -->
+              <circle cx="78" cy="142" r="3.5" fill="#fde047" />
+              <circle cx="102" cy="145" r="3.5" fill="#fde047" />
+              <circle cx="138" cy="144" r="3.5" fill="#fde047" />
+              <circle cx="162" cy="141" r="3.5" fill="#fde047" />
+
+              <!-- Cherries on Top -->
+              <circle cx="84" cy="96" r="6" fill="#be123c" />
+              <circle cx="120" cy="94" r="6" fill="#be123c" />
+              <circle cx="156" cy="96" r="6" fill="#be123c" />
+
+              <!-- TEXT WRITTEN DIRECTLY ON THE CAKE: "Happy Birthday My Wife" -->
+              <g filter="url(#cakeTextGlow)">
+                <!-- Golden Script Text on bottom tier -->
+                <text x="120" y="185" text-anchor="middle" font-family="'Dancing Script', cursive" font-size="14.5"
+                  font-weight="700" fill="#fef3c7" letter-spacing="0.5">
+                  Happy Birthday My Wife ❤️
+                </text>
+                <!-- Golden Top Tier Subtitle -->
+                <text x="120" y="132" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5"
+                  font-weight="800" fill="#fde047" letter-spacing="1.5">
+                  MERI JAAN ✨
+                </text>
+              </g>
+
+              <!-- Center Candle Body -->
+              <rect x="116" y="56" width="8" height="40" rx="3" fill="#fff" stroke="#f43f5e" stroke-width="1.5" />
+              <path d="M116 66 L124 62 M116 76 L124 72 M116 86 L124 82" stroke="#e11d48" stroke-width="2" />
+              <line x1="120" y1="56" x2="120" y2="48" stroke="#333" stroke-width="2" stroke-linecap="round" />
+
+              <!-- INTERACTIVE FLAME -->
+              <g id="candleFlame" class="flame-active cursor-pointer">
+                <circle cx="120" cy="34" r="32" fill="transparent" />
+                <ellipse cx="120" cy="32" rx="15" ry="20" fill="url(#flameAura)" opacity="0.5" />
+                <path d="M120 16 C112 26 109 33 113 41 C117 46 123 46 127 41 C131 33 128 26 120 16 Z"
+                  fill="url(#outerFlameGrad)" />
+                <path d="M120 24 C117 30 115 34 117 39 C119 42 121 42 123 39 C125 34 123 30 120 24 Z" fill="#fffbeb" />
+              </g>
+
+              <!-- SMOKE PUFF -->
+              <g id="candleSmoke" class="hidden pointer-events-none">
+                <path d="M120 48 Q114 36 122 28 Q128 18 120 10 Q112 2 122 -6" stroke="rgba(255,241,242,0.75)"
+                  stroke-width="3" stroke-linecap="round" fill="none" class="smoke-puff" />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Banner in Front of Cake: "Happy Birthday My Wife" -->
+          <div
+            class="mt-1 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-950 via-rose-900 to-rose-950 border border-champagne-400/60 shadow-glow-gold">
+            <span
+              class="text-sm sm:text-base font-bold text-champagne-200 font-display tracking-wide flex items-center gap-1.5">
+              <span>🎂 Happy Birthday My Wife</span>
+              <span class="text-rose-400">❤️💍</span>
+            </span>
+          </div>
+
+          <!-- Big Touch Button on Mobile directly under the cake so she can blow it with 1 tap -->
+          <button id="blowCandleBtn" onclick="blowCandle()"
+            class="mt-3 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 text-white text-xs sm:text-sm font-bold shadow-glow-rose hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border border-rose-300/40">
+            <span>👆 Tap Here to Blow Candle & Make Wish</span>
+            <span>🕯️✨</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Secret Wish Reveal Note (Hidden until blown) -->
+      <div id="wishRevealCard"
+        class="hidden opacity-0 transform translate-y-4 transition-all duration-700 max-w-lg w-full mt-6 p-6 rounded-2xl glass-card border border-champagne-400/50 shadow-glow-gold relative overflow-hidden">
+
+        <!-- Glowing star particles background -->
+        <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-rose-500/20 rounded-full blur-xl pointer-events-none">
+        </div>
+
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-12 h-12 rounded-full bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-rose-300 mb-3 shadow-inner">
+            <i data-lucide="sparkles" class="w-6 h-6 text-champagne-300"></i>
+          </div>
+
+          <h3 class="font-display text-xl sm:text-2xl font-bold text-champagne-200 mb-2">
+            Wish Granted, Meri Jaan & My Dearest Wife! ✨💍
+          </h3>
+
+          <p class="font-script text-2xl sm:text-3xl text-rose-200 leading-relaxed font-semibold my-2">
+            "May all your dreams come true, I will always be right by your side, holding your hand forever! Happy
+            Birthday Jaan! ❤️"
+          </p>
+
+          <p class="text-xs sm:text-sm text-rose-300/80 mt-2 font-light">
+            You bring endless light and warmth into my life. Every single prayer I make has your name in it, my lovely
+            wife.
+          </p>
+
+          <button onclick="relightCandle()"
+            class="mt-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs text-rose-200 transition-colors border border-white/20">
+            <i data-lucide="flame" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Relight Candle & Wish Again</span>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- STAGE 4: "REASONS WHY I LOVE YOU" FLIP CARDS -->
+    <!-- ========================================== -->
+    <section id="reasonsSection" class="flex flex-col items-center">
+
+      <!-- Section Tag -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-rose-500/30 text-rose-300 text-xs sm:text-sm font-medium mb-3 shadow-glass">
+        <i data-lucide="heart-handshake" class="w-4 h-4 text-rose-400"></i>
+        <span>From The Bottom Of My Heart</span>
+      </div>
+
+      <h2 class="font-display text-2xl sm:text-4xl font-bold text-white text-center mb-2">
+        Reasons Why I Love You 💖
+      </h2>
+
+      <!-- Clear Mobile Instruction -->
+      <div
+        class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs sm:text-sm font-semibold mb-8 shadow-glow-gold animate-bounce">
+        <span class="text-base">👆</span>
+        <span>Har card par tap karke secret love reason padhein! ✨</span>
+      </div>
+
+      <!-- 4 Flip Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 w-full max-w-2xl">
+
+        <!-- CARD 1: Your Smile -->
+        <div class="flip-card h-56 sm:h-60" onclick="toggleCardFlip(this)">
+          <div class="flip-card-inner">
+
+            <!-- Front -->
+            <div
+              class="flip-card-front glass-card p-5 sm:p-6 flex flex-col items-center justify-center text-center border border-rose-500/30 hover:border-rose-400/60 transition-colors">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-rose-500/15 border border-rose-400/30 flex items-center justify-center text-rose-400 mb-3 shadow-inner">
+                <i data-lucide="smile" class="w-7 h-7"></i>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-1">Your Smile</h3>
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600/30 border border-rose-400/50 text-[11px] font-bold text-rose-100 shadow-sm animate-pulse">
+                <span>👆 Chhu kar dekhein (Tap to flip)</span>
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-champagne-300"></i>
+              </div>
+            </div>
+
+            <!-- Back -->
+            <div
+              class="flip-card-back bg-gradient-to-br from-rose-900/90 to-rose-950/95 border border-champagne-400/50 p-5 sm:p-6 flex flex-col items-center justify-center text-center shadow-glow-rose">
+              <i data-lucide="sparkles" class="w-5 h-5 text-champagne-300 mb-1"></i>
+              <h4 class="text-xs uppercase tracking-widest text-champagne-300 font-bold mb-1">Pure Magic</h4>
+              <p class="font-script text-2xl sm:text-3xl text-rose-100 font-semibold leading-relaxed">
+                "The prettiest curve that instantly fixes my worst days."
+              </p>
+              <button onclick="event.stopPropagation(); openVideoModal('./assets/gift1.mp4', 'Your Smile 💖')"
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne-400/20 hover:bg-champagne-400/30 text-champagne-200 text-[11px] font-bold border border-champagne-400/50 transition-transform active:scale-95 shadow-sm">
+                <i data-lucide="play" class="w-3 h-3 fill-current text-champagne-300"></i>
+                <span>Watch Video Clip 🎬</span>
+              </button>
+              <span class="text-[10px] text-champagne-300/80 mt-1.5 flex items-center gap-1 font-medium">
+                👆 Wapas palatne ke liye tap karein ↩️
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CARD 2: Our Memories -->
+        <div class="flip-card h-56 sm:h-60" onclick="toggleCardFlip(this)">
+          <div class="flip-card-inner">
+
+            <!-- Front -->
+            <div
+              class="flip-card-front glass-card p-5 sm:p-6 flex flex-col items-center justify-center text-center border border-rose-500/30 hover:border-rose-400/60 transition-colors">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-champagne-500/15 border border-champagne-400/30 flex items-center justify-center text-champagne-300 mb-3 shadow-inner">
+                <i data-lucide="camera" class="w-7 h-7"></i>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-1">Our Memories</h3>
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600/30 border border-rose-400/50 text-[11px] font-bold text-rose-100 shadow-sm animate-pulse">
+                <span>👆 Chhu kar dekhein (Tap to flip)</span>
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-champagne-300"></i>
+              </div>
+            </div>
+
+            <!-- Back -->
+            <div
+              class="flip-card-back bg-gradient-to-br from-rose-900/90 to-rose-950/95 border border-champagne-400/50 p-5 sm:p-6 flex flex-col items-center justify-center text-center shadow-glow-rose">
+              <i data-lucide="heart" class="w-5 h-5 text-rose-400 fill-rose-400 mb-1"></i>
+              <h4 class="text-xs uppercase tracking-widest text-champagne-300 font-bold mb-1">Cherished Together</h4>
+              <p class="font-script text-2xl sm:text-3xl text-rose-100 font-semibold leading-relaxed">
+                "Every moment with you feels like home."
+              </p>
+              <button onclick="event.stopPropagation(); openVideoModal('./assets/gift2.mp4', 'Our Memories 📸')"
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne-400/20 hover:bg-champagne-400/30 text-champagne-200 text-[11px] font-bold border border-champagne-400/50 transition-transform active:scale-95 shadow-sm">
+                <i data-lucide="play" class="w-3 h-3 fill-current text-champagne-300"></i>
+                <span>Watch Video Clip 🎬</span>
+              </button>
+              <span class="text-[10px] text-champagne-300/80 mt-1.5 flex items-center gap-1 font-medium">
+                👆 Wapas palatne ke liye tap karein ↩️
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CARD 3: My Rock -->
+        <div class="flip-card h-56 sm:h-60" onclick="toggleCardFlip(this)">
+          <div class="flip-card-inner">
+
+            <!-- Front -->
+            <div
+              class="flip-card-front glass-card p-5 sm:p-6 flex flex-col items-center justify-center text-center border border-rose-500/30 hover:border-rose-400/60 transition-colors">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-rose-500/15 border border-rose-400/30 flex items-center justify-center text-rose-400 mb-3 shadow-inner">
+                <i data-lucide="gem" class="w-7 h-7"></i>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-1">My Rock</h3>
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600/30 border border-rose-400/50 text-[11px] font-bold text-rose-100 shadow-sm animate-pulse">
+                <span>👆 Chhu kar dekhein (Tap to flip)</span>
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-champagne-300"></i>
+              </div>
+            </div>
+
+            <!-- Back -->
+            <div
+              class="flip-card-back bg-gradient-to-br from-rose-900/90 to-rose-950/95 border border-champagne-400/50 p-5 sm:p-6 flex flex-col items-center justify-center text-center shadow-glow-rose">
+              <i data-lucide="shield" class="w-5 h-5 text-champagne-300 mb-1"></i>
+              <h4 class="text-xs uppercase tracking-widest text-champagne-300 font-bold mb-1">Unshakable Love</h4>
+              <p class="font-script text-2xl sm:text-3xl text-rose-100 font-semibold leading-relaxed">
+                "Thank you for being my constant partner, best friend, and love."
+              </p>
+              <button onclick="event.stopPropagation(); openVideoModal('./assets/gift3.mp4', 'My Rock 💎')"
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne-400/20 hover:bg-champagne-400/30 text-champagne-200 text-[11px] font-bold border border-champagne-400/50 transition-transform active:scale-95 shadow-sm">
+                <i data-lucide="play" class="w-3 h-3 fill-current text-champagne-300"></i>
+                <span>Watch Video Clip 🎬</span>
+              </button>
+              <span class="text-[10px] text-champagne-300/80 mt-1.5 flex items-center gap-1 font-medium">
+                👆 Wapas palatne ke liye tap karein ↩️
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- CARD 4: Forever & Always -->
+        <div class="flip-card h-56 sm:h-60" onclick="toggleCardFlip(this)">
+          <div class="flip-card-inner">
+
+            <!-- Front -->
+            <div
+              class="flip-card-front glass-card p-5 sm:p-6 flex flex-col items-center justify-center text-center border border-rose-500/30 hover:border-rose-400/60 transition-colors">
+              <div
+                class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-amber-300 mb-3 shadow-inner">
+                <i data-lucide="infinity" class="w-7 h-7"></i>
+              </div>
+              <h3 class="font-display text-xl font-bold text-white mb-1">Forever & Always</h3>
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-600/30 border border-rose-400/50 text-[11px] font-bold text-rose-100 shadow-sm animate-pulse">
+                <span>👆 Chhu kar dekhein (Tap to flip)</span>
+                <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-champagne-300"></i>
+              </div>
+            </div>
+
+            <!-- Back -->
+            <div
+              class="flip-card-back bg-gradient-to-br from-rose-900/90 to-rose-950/95 border border-champagne-400/50 p-5 sm:p-6 flex flex-col items-center justify-center text-center shadow-glow-rose">
+              <i data-lucide="flame" class="w-5 h-5 text-rose-400 mb-1"></i>
+              <h4 class="text-xs uppercase tracking-widest text-champagne-300 font-bold mb-1">Timeless Beauty</h4>
+              <p class="font-script text-2xl sm:text-3xl text-rose-100 font-semibold leading-relaxed">
+                "Another year older, but to me, you only grow more breathtaking."
+              </p>
+              <button onclick="event.stopPropagation(); openVideoModal('./assets/gift4.mp4', 'Forever & Always ♾️')"
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne-400/20 hover:bg-champagne-400/30 text-champagne-200 text-[11px] font-bold border border-champagne-400/50 transition-transform active:scale-95 shadow-sm">
+                <i data-lucide="play" class="w-3 h-3 fill-current text-champagne-300"></i>
+                <span>Watch Video Clip 🎬</span>
+              </button>
+              <span class="text-[10px] text-champagne-300/80 mt-1.5 flex items-center gap-1 font-medium">
+                👆 Wapas palatne ke liye tap karein ↩️
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- STAGE 5: THE HEARTFELT LOVE LETTER -->
+    <!-- ========================================== -->
+    <section id="letterSection" class="flex flex-col items-center">
+
+      <!-- Section Tag -->
+      <div
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-rose-500/30 text-rose-300 text-xs sm:text-sm font-medium mb-3 shadow-glass">
+        <i data-lucide="mail-open" class="w-4 h-4 text-rose-400"></i>
+        <span>My Personal Promise</span>
+      </div>
+
+      <h2 class="font-display text-2xl sm:text-4xl font-bold text-white text-center mb-8">
+        The Heartfelt Love Letter 💌
+      </h2>
+
+      <!-- Luxury Envelope Container -->
+      <div class="relative w-full max-w-xl mx-auto">
+
+        <!-- Ambient Warm Backlight -->
+        <div
+          class="absolute -inset-2 bg-gradient-to-r from-rose-600/30 via-champagne-500/20 to-rose-500/30 rounded-3xl blur-2xl">
+        </div>
+
+        <!-- Main Letter Parchment Card -->
+        <div
+          class="relative glass-card-bright p-6 sm:p-10 rounded-3xl border border-rose-400/40 shadow-2xl backdrop-blur-2xl">
+
+          <!-- Vintage Letter Stamp & Seal Header -->
+          <div class="flex items-center justify-between border-b border-rose-300/20 pb-5 mb-6">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-full bg-rose-600/30 border border-rose-400/50 flex items-center justify-center text-rose-300">
+                <i data-lucide="heart" class="w-5 h-5 fill-rose-500"></i>
+              </div>
+              <div>
+                <span class="block text-xs uppercase tracking-widest text-champagne-300 font-semibold">Special
+                  Delivery</span>
+                <span class="text-sm text-rose-100 font-medium">To: Meri Jaan, My Beloved Wife 💍❤️</span>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span
+                class="inline-block px-3 py-1 rounded bg-rose-950/80 border border-rose-500/40 text-[11px] font-mono text-rose-300">
+                03 . 11 . 2026
+              </span>
+            </div>
+          </div>
+
+          <!-- Letter Body Message -->
+          <div class="space-y-5 text-rose-100 leading-relaxed font-light text-base sm:text-lg">
+
+            <p class="font-script text-3xl sm:text-4xl text-champagne-300 font-bold mb-2">
+              My Dearest Meri Jaan & My Beautiful Wife,
+            </p>
+
+            <p
+              class="relative pl-4 border-l-2 border-rose-500/60 italic font-normal text-rose-50/95 leading-relaxed bg-white/5 py-3 rounded-r-xl pr-3">
+              "Happy Birthday to the one who owns my heart. Thank you for walking into my life, for your laughter, your
+              kindness, and the way you make the simplest moments unforgettable. Today is all about you, and I promise
+              to make every single day as special as you make mine. I love you endlessly, Meri Jaan. ❤️"
+            </p>
+
+            <p class="text-sm sm:text-base text-rose-200/90 pt-2">
+              Every day spent by your side is a blessing I will always cherish. Seeing you smile makes my entire world
+              complete. No matter how many birthdays come and go, my heart will always beat just for you, my sweet wife.
+            </p>
+
+            <!-- Sign off -->
+            <div class="pt-6 flex flex-col items-end text-right">
+              <span class="text-xs uppercase tracking-widest text-rose-300/80">Forever & Always Yours,</span>
+              <span class="font-script text-3xl sm:text-4xl text-rose-400 font-bold mt-1">With all my love, Meri Jaan
+                🌹</span>
+            </div>
+
+          </div>
+
+          <!-- Cute interactive hearts trigger at bottom of letter -->
+          <div class="mt-8 pt-5 border-t border-rose-300/20 flex flex-wrap items-center justify-between gap-3">
+            <span class="text-xs text-rose-300/80 flex items-center gap-1.5 font-medium">
+              <i data-lucide="sparkles" class="w-4 h-4 text-champagne-400"></i>
+              <span>Screen par pyaar barsane ke liye yahan dabayein:</span>
+            </span>
+            <button onclick="triggerLoveShower()"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 text-white text-xs sm:text-sm font-bold shadow-glow-rose hover:scale-105 active:scale-95 transition-transform border border-rose-300/40 animate-pulse">
+              <span>👆 Send Endless Love ❤️</span>
+              <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- STAGE 6: GIFT VIDEOS SECTION               -->
+    <!-- ========================================== -->
+    <section id="giftSection" class="relative py-16 px-4 sm:px-6 overflow-hidden">
+
+      <!-- Background ambient glow -->
+      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-rose-700/10 blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-amber-600/8 blur-3xl"></div>
+      </div>
+
+      <div class="relative max-w-2xl mx-auto">
+
+        <!-- Section Badge -->
+        <div class="flex justify-center mb-5">
+          <span
+            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs sm:text-sm font-semibold tracking-wide">
+            <span class="animate-pulse">🎁</span>
+            Aapke Liye Pyaar Bhara Tohfa
+            <span class="animate-pulse">🎁</span>
+          </span>
+        </div>
+
+        <!-- Section Heading -->
+        <h2
+          class="font-display text-3xl sm:text-4xl text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-2 leading-tight">
+          💝 Aapke Liye Ek Chhota Sa Tohfa 💝
+        </h2>
+        <p class="font-script text-xl sm:text-2xl text-center text-rose-300/80 mb-8">
+          Meri jaan, ye chhote se gift sirf aapke liye hain...
+        </p>
+
+        <!-- Big Romantic Hindi Message Card -->
+        <div
+          class="glass-card-bright rounded-3xl p-6 sm:p-8 mb-10 border border-champagne-400/30 shadow-glow-rose relative overflow-hidden">
+          <!-- Decorative corner hearts -->
+          <span class="absolute top-3 left-4 text-rose-400/40 text-2xl select-none">❤️</span>
+          <span class="absolute top-3 right-4 text-rose-400/40 text-2xl select-none">❤️</span>
+          <span class="absolute bottom-3 left-4 text-rose-400/40 text-xl select-none">🌹</span>
+          <span class="absolute bottom-3 right-4 text-rose-400/40 text-xl select-none">🌹</span>
+
+          <!-- Letter stamp header -->
+          <div class="flex justify-center mb-4">
+            <div
+              class="inline-flex items-center gap-2 border-2 border-dashed border-champagne-400/50 rounded-xl px-4 py-1.5">
+              <span class="text-champagne-300 font-display text-xs tracking-widest uppercase">Sirf Aur Sirf Aapke Liye
+                💍</span>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-rose-100/90 leading-relaxed text-sm sm:text-base text-center font-sans">
+            <p class="text-lg sm:text-xl font-script text-champagne-200 mb-3">
+              Meri Pyaari Jaan aur Meri Sabse Khoobsurat Wife... 💖
+            </p>
+            <p>
+              Aaj aapka janmdin hai — aur main chahta hoon ki aap jaanein ki aap sirf meri girlfriend ya wife nahi hain,
+              <strong class="text-rose-200">aap meri poori duniya hain, meri saanson ki wajah hain.</strong>
+            </p>
+            <p>
+              Ye jo chhote se gifts maine aapko bheje hain — ye to ek bahana tha. Asli tohfa to
+              <em class="text-champagne-200 font-script text-lg">mera woh dil hai jo sirf aapke liye dhadakta hai</em>,
+              aaj bhi, kal bhi, aur hamesha ke liye. 🤍
+            </p>
+            <p>
+              Aapki har muskaan pe mera dil jhoom uthta hai, aapki har baat mujhe chain deti hai.
+              Aap hain to duniya khoobsurat lagti hai —
+              <strong class="text-rose-200">aap hain to zindagi mukammal lagti hai.</strong> 🌹
+            </p>
+            <p class="font-script text-xl sm:text-2xl text-rose-300 mt-4">
+              Aapse pyaar karta hoon — ab bhi, aur hamesha... ❤️✨
+            </p>
+            <p class="text-xs text-rose-400/60 mt-2">— Aapka Apna, Your Husband 💍</p>
+          </div>
+        </div>
+
+        <!-- Tap Hint -->
+        <p class="text-center text-rose-300/70 text-sm mb-6 animate-pulse">
+          👆 Har gift par tap karke video dekhein — maine ye sirf aapke liye banaya hai 💖
+        </p>
+
+        <!-- Gift Video Cards Grid: 2x2 on sm+, 1 col on mobile -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <!-- Gift 1 -->
+          <div onclick="openVideoModal('./assets/gift1.mp4', 'Pehla Tohfa 🎁')"
+            class="glass-card rounded-2xl overflow-hidden border border-rose-500/40 shadow-glow-rose cursor-pointer group active:scale-95 transition-transform duration-150 select-none touch-manipulation">
+            <!-- Video Thumbnail Preview -->
+            <div
+              class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
+              <video src="./assets/gift1.mp4"
+                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
+                muted preload="metadata" playsinline></video>
+              <!-- Play overlay -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
+                </div>
+                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+              </div>
+            </div>
+            <!-- Card Info -->
+            <div class="p-4">
+              <p class="font-display text-champagne-200 text-base font-semibold mb-1">Pehla Tohfa 🎁</p>
+              <p class="font-script text-rose-300 text-sm">Aapki muskaan ke liye ek pyaari si yaad</p>
+            </div>
+          </div>
+
+          <!-- Gift 2 -->
+          <div onclick="openVideoModal('./assets/gift2.mp4', 'Doosra Tohfa 💝')"
+            class="glass-card rounded-2xl overflow-hidden border border-rose-500/40 shadow-glow-rose cursor-pointer group active:scale-95 transition-transform duration-150 select-none touch-manipulation">
+            <div
+              class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
+              <video src="./assets/gift2.mp4"
+                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
+                muted preload="metadata" playsinline></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
+                </div>
+                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="font-display text-champagne-200 text-base font-semibold mb-1">Doosra Tohfa 💝</p>
+              <p class="font-script text-rose-300 text-sm">Har pal aapke saath guzarna chahta hoon</p>
+            </div>
+          </div>
+
+          <!-- Gift 3 -->
+          <div onclick="openVideoModal('./assets/gift3.mp4', 'Teesra Tohfa 🌹')"
+            class="glass-card rounded-2xl overflow-hidden border border-rose-500/40 shadow-glow-rose cursor-pointer group active:scale-95 transition-transform duration-150 select-none touch-manipulation">
+            <div
+              class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
+              <video src="./assets/gift3.mp4"
+                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
+                muted preload="metadata" playsinline></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
+                </div>
+                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="font-display text-champagne-200 text-base font-semibold mb-1">Teesra Tohfa 🌹</p>
+              <p class="font-script text-rose-300 text-sm">Mere dil ki gehraiyyon se aapke liye</p>
+            </div>
+          </div>
+
+          <!-- Gift 4 -->
+          <div onclick="openVideoModal('./assets/gift4.mp4', 'Chautha Tohfa ✨')"
+            class="glass-card rounded-2xl overflow-hidden border border-rose-500/40 shadow-glow-rose cursor-pointer group active:scale-95 transition-transform duration-150 select-none touch-manipulation">
+            <div
+              class="relative bg-gradient-to-br from-rose-950 to-night-900 aspect-video flex items-center justify-center overflow-hidden">
+              <video src="./assets/gift4.mp4"
+                class="w-full h-full object-cover opacity-60 group-active:opacity-80 transition-opacity pointer-events-none"
+                muted preload="metadata" playsinline></video>
+              <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                <div
+                  class="w-14 h-14 rounded-full bg-rose-600/90 flex items-center justify-center shadow-glow-rose group-active:scale-110 transition-transform border-2 border-white/30">
+                  <svg viewBox="0 0 24 24" class="w-7 h-7 fill-white ml-1">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
+                </div>
+                <span class="text-white/70 text-xs font-semibold tracking-wide">TAP TO PLAY</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="font-display text-champagne-200 text-base font-semibold mb-1">Chautha Tohfa ✨</p>
+              <p class="font-script text-rose-300 text-sm">Kyunki aap deserve karti hain duniya ki sabse achi cheezein
+              </p>
+            </div>
+          </div>
+
+        </div><!-- end grid -->
+
+        <!-- Bottom love note -->
+        <div class="mt-8 text-center">
+          <p class="font-script text-2xl text-rose-300/80">
+            "Aap hi meri zindagi, aap hi meri duniya, aap hi meri manzil..." 🌹
+          </p>
+          <div class="flex justify-center mt-4">
+            <button onclick="triggerLoveShower()"
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-rose-600 to-rose-500 hover:from-rose-500 hover:to-rose-400 text-white font-semibold text-sm shadow-glow-rose active:scale-95 transition-all duration-200 border border-rose-400/30 touch-manipulation">
+              <span>💖 Aur Pyaar Bhejo</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================== -->
+    <footer class="pt-8 pb-16 text-center border-t border-rose-900/40">
+      <div class="inline-flex items-center gap-2 text-rose-300/70 text-xs sm:text-sm">
+        <span>Made with endless love for your 3rd November Birthday</span>
+        <i data-lucide="heart" class="w-4 h-4 text-rose-500 fill-rose-500 animate-pulse"></i>
+      </div>
+      <p class="text-[11px] text-rose-400/40 mt-1">
+        Celebrating every beat of your heart, today and forever.
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- VIDEO SURPRISE MODAL -->
+  <!-- ========================================== -->
+  <div id="videoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div
+      class="relative max-w-sm w-full glass-card border border-rose-500/50 rounded-3xl p-4 shadow-2xl flex flex-col items-center animate-entrance-glow">
+      <button onclick="closeVideoModal()"
+        class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-rose-600 hover:bg-rose-700 text-white flex items-center justify-center font-bold shadow-lg border-2 border-white/40 active:scale-90 transition-transform z-20"
+        aria-label="Close Video">
+        ✕
+      </button>
+      <div
+        class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold mb-3">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-champagne-400"></i>
+        <span id="videoModalTitle">Special Video Surprise 🎬</span>
+      </div>
+      <div class="w-full rounded-2xl overflow-hidden bg-black/70 border border-white/10 aspect-[9/16] max-h-[65vh]">
+        <video id="modalVideoPlayer" class="w-full h-full object-cover" controls playsinline></video>
+      </div>
+      <p class="text-[11px] text-rose-200/80 mt-3 text-center">
+        Every moment with you is a precious memory, Meri Jaan ❤️
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- JAVASCRIPT LOGIC & INTERACTIONS -->
+  <!-- ========================================== -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // ----------------------------------------------------
+    // PHOTO GALLERY DATA & LOGIC
+    // ----------------------------------------------------
+    const photos = [
+      {
+        url: './assets/couple.jpg',
+        caption: '"My favorite place in all the world is right next to you 💫"',
+        tag: 'Memory 1 of 3 (Our beautiful smile together)'
+      },
+      {
+        url: './assets/holding-hands.jpg',
+        caption: '"Holding your hand is all I ever want to do forever ✨"',
+        tag: 'Memory 2 of 3 (Hand in hand through everything)'
+      },
+      {
+        url: './assets/mirror-selfie.jpg',
+        caption: '"With you, every simple moment is my happiest memory 💖"',
+        tag: 'Memory 3 of 3 (Forever by your side)'
+      }
+    ];
+
+    let currentPhotoIndex = 0;
+
+    function switchPhoto(index) {
+      if (index === currentPhotoIndex) return;
+      currentPhotoIndex = index;
+
+      const img = document.getElementById('polaroidImg');
+      const caption = document.getElementById('polaroidCaption');
+      const counter = document.getElementById('photoCounter');
+      const dots = document.querySelectorAll('.photo-dot');
+
+      // Smooth fade transition
+      img.style.opacity = '0.3';
+      img.style.transform = 'scale(0.98)';
+      caption.style.opacity = '0';
+
+      setTimeout(() => {
+        img.src = photos[currentPhotoIndex].url;
+        caption.textContent = photos[currentPhotoIndex].caption;
+        counter.textContent = photos[currentPhotoIndex].tag;
+
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+        caption.style.opacity = '1';
+
+        // Update dot states
+        dots.forEach((dot, idx) => {
+          if (idx === currentPhotoIndex) {
+            dot.className = 'photo-dot w-2.5 h-2.5 rounded-full bg-white transition-all scale-125';
+          } else {
+            dot.className = 'photo-dot w-2.5 h-2.5 rounded-full bg-white/40 transition-all';
+          }
+        });
+      }, 250);
+    }
+
+    // Auto-advance photo slideshow gently after intro opens
+    let photoSlideshowTimer = null;
+    function startPhotoSlideshow() {
+      if (photoSlideshowTimer) return;
+      photoSlideshowTimer = setInterval(() => {
+        const nextIndex = (currentPhotoIndex + 1) % photos.length;
+        switchPhoto(nextIndex);
+      }, 7000);
+    }
+
+
+    // ----------------------------------------------------
+    // WEB AUDIO API SYNTHESIZER (ROMANTIC MUSIC BOX FALLBACK)
+    // ----------------------------------------------------
+    let audioCtx = null;
+    let synthPlaying = false;
+    let synthTimer = null;
+
+    // Romantic music box chord progression: Cmaj7 - Am7 - Fmaj7 - G - Em7 - Fmaj7 - G
+    const chords = [
+      [261.63, 329.63, 392.00, 493.88], // Cmaj7 (C4, E4, G4, B4)
+      [220.00, 261.63, 329.63, 392.00], // Am7 (A3, C4, E4, G4)
+      [174.61, 220.00, 261.63, 329.63], // Fmaj7 (F3, A3, C4, E4)
+      [196.00, 246.94, 293.66, 392.00], // G (G3, B3, D4, G4)
+      [164.81, 196.00, 246.94, 329.63], // Em7 (E3, G3, B3, E4)
+      [174.61, 220.00, 261.63, 349.23], // F (F3, A3, C4, F4)
+      [196.00, 246.94, 293.66, 392.00]  // G (G3, B3, D4, G4)
+    ];
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSoftTone(freq, time, duration = 1.8) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // Triangle wave gives a warm acoustic music box / celesta chime timbre
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, time);
+
+        // Music box envelope
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.exponentialRampToValueAtTime(0.08, time + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(time);
+        osc.stop(time + duration);
+      } catch (e) {
+        console.warn('Audio tone error:', e);
+      }
+    }
+
+    function startSynthRomanticMelody() {
+      if (synthPlaying) return;
+      initAudioContext();
+      synthPlaying = true;
+
+      let chordIdx = 0;
+      let noteStep = 0;
+
+      synthTimer = setInterval(() => {
+        if (!synthPlaying || !audioCtx) return;
+        const currentChord = chords[chordIdx];
+        const freq = currentChord[noteStep % currentChord.length];
+
+        playSoftTone(freq, audioCtx.currentTime, 1.9);
+
+        // Gentle higher octave chime sparkle
+        if (noteStep % 2 === 0) {
+          playSoftTone(freq * 2, audioCtx.currentTime + 0.22, 1.2);
+        }
+
+        noteStep++;
+        if (noteStep >= 4) {
+          noteStep = 0;
+          chordIdx = (chordIdx + 1) % chords.length;
+        }
+      }, 520);
+    }
+
+    function stopSynthRomanticMelody() {
+      synthPlaying = false;
+      if (synthTimer) {
+        clearInterval(synthTimer);
+        synthTimer = null;
+      }
+    }
+
+    // Play sparkling chime on candle blowout or wish
+    function playWishChime() {
+      initAudioContext();
+      if (!audioCtx) return;
+      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, E6
+      notes.forEach((freq, idx) => {
+        playSoftTone(freq, audioCtx.currentTime + (idx * 0.12), 1.5);
+      });
+    }
+
+
+    // ----------------------------------------------------
+    // BACKGROUND MUSIC & CONTROLS
+    // ----------------------------------------------------
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleMusicBtn = document.getElementById('toggleMusicBtn');
+    const musicStatusText = document.getElementById('musicStatusText');
+    const soundBars = document.getElementById('soundBars');
+    let isMusicPlaying = false;
+    let hasMp3Error = false;
+
+    function setMusicUiState(playing) {
+      isMusicPlaying = playing;
+      const bars = soundBars.querySelectorAll('span');
+      if (playing) {
+        bars.forEach(b => b.classList.remove('paused-bar'));
+        musicStatusText.innerHTML = '<span>Playing 🎶</span>';
+      } else {
+        bars.forEach(b => b.classList.add('paused-bar'));
+        musicStatusText.innerHTML = '<span>Paused ⏸</span>';
+      }
+    }
+
+    async function startMusic() {
+      initAudioContext();
+      if (hasMp3Error) {
+        startSynthRomanticMelody();
+        setMusicUiState(true);
+        return;
+      }
+      try {
+        await bgMusic.play();
+        setMusicUiState(true);
+      } catch (err) {
+        console.log('MP3 playback fallback to gentle music box audio synth:', err.message);
+        hasMp3Error = true;
+        startSynthRomanticMelody();
+        setMusicUiState(true);
+      }
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+      stopSynthRomanticMelody();
+      setMusicUiState(false);
+    }
+
+    toggleMusicBtn.addEventListener('click', () => {
+      if (isMusicPlaying) {
+        pauseMusic();
+      } else {
+        startMusic();
+      }
+    });
+
+    // If audio naturally starts or fails
+    bgMusic.addEventListener('play', () => setMusicUiState(true));
+    bgMusic.addEventListener('pause', () => setMusicUiState(false));
+    bgMusic.addEventListener('error', () => {
+      console.info('romantic-song.mp3 not found or failed, using synthesized acoustic music.');
+      hasMp3Error = true;
+      if (isMusicPlaying) {
+        startSynthRomanticMelody();
+      }
+    });
+
+
+    // ----------------------------------------------------
+    // STAGE 1: GIFT BOX OPENING INTERACTION
+    // ----------------------------------------------------
+    const openGiftBtn = document.getElementById('openGiftBtn');
+    const giftBoxContainer = document.getElementById('giftBoxContainer');
+    const giftLidGroup = document.getElementById('giftLidGroup');
+    const introOverlay = document.getElementById('introOverlay');
+    const mainContent = document.getElementById('mainContent');
+
+    function triggerConfettiBurst() {
+      // Confetti burst with romantic theme colors
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#e11d48', '#fb7185', '#fbbf24', '#f43f5e', '#ffffff']
+      });
+
+      // Side cannons for full screen celebration
+      setTimeout(() => {
+        confetti({
+          particleCount: 60,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#e11d48', '#fbbf24', '#fff1f2']
+        });
+        confetti({
+          particleCount: 60,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#e11d48', '#fbbf24', '#fff1f2']
+        });
+      }, 250);
+    }
+
+    function openSurpriseGift() {
+      // 1. Lift lid with 3D transform
+      giftLidGroup.style.transform = 'translateY(-65px) rotate(-14deg) scale(1.15)';
+      giftBoxContainer.classList.remove('animate-gift-vibe');
+
+      // 2. Play Audio
+      startMusic();
+
+      // 3. Burst colorful confetti
+      triggerConfettiBurst();
+
+      // 4. Start photo slideshow
+      startPhotoSlideshow();
+
+      // 5. Fade out intro overlay smoothly
+      setTimeout(() => {
+        introOverlay.style.opacity = '0';
+        introOverlay.style.pointerEvents = 'none';
+
+        // 5. Reveal main content
+        mainContent.classList.remove('opacity-0');
+        mainContent.classList.add('opacity-100');
+
+        // Show celebratory floating toast banner
+        const toast = document.getElementById('celebrationToast');
+        if (toast) {
+          toast.classList.remove('hidden');
+          setTimeout(() => {
+            toast.classList.remove('opacity-0', '-translate-y-6');
+            toast.classList.add('opacity-100', 'translate-y-0');
+          }, 400);
+        }
+
+        // Refresh Lucide icons in newly rendered sections
+        lucide.createIcons();
+
+        // Extra celebratory burst
+        setTimeout(() => {
+          triggerConfettiBurst();
+        }, 600);
+      }, 700);
+    }
+
+    openGiftBtn.addEventListener('click', openSurpriseGift);
+    giftBoxContainer.addEventListener('click', openSurpriseGift);
+
+
+    // ----------------------------------------------------
+    // STAGE 3: CAKE CANDLE BLOWOUT INTERACTION
+    // ----------------------------------------------------
+    let candleBlown = false;
+    const candleFlame = document.getElementById('candleFlame');
+    const candleSmoke = document.getElementById('candleSmoke');
+    const wishRevealCard = document.getElementById('wishRevealCard');
+    const candleInstruction = document.getElementById('candleInstruction');
+
+    function blowCandle() {
+      if (candleBlown) return;
+      candleBlown = true;
+
+      // 1. Hide flame smoothly
+      candleFlame.classList.remove('flame-active');
+      candleFlame.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      candleFlame.style.opacity = '0';
+      candleFlame.style.transform = 'scale(0.2)';
+
+      // Hide tap hint pointer & update blow button
+      const candleTapHint = document.getElementById('candleTapHint');
+      const blowCandleBtn = document.getElementById('blowCandleBtn');
+      if (candleTapHint) candleTapHint.classList.add('hidden');
+      if (blowCandleBtn) {
+        blowCandleBtn.classList.add('opacity-50', 'pointer-events-none');
+        blowCandleBtn.innerHTML = '<span>🎉 Wish Granted! Candle Blown 🎂</span>';
+      }
+
+      // 2. Show rising smoke
+      candleSmoke.classList.remove('hidden');
+
+      // 3. Play audio chime
+      playWishChime();
+
+      // 4. Heartfelt celebratory confetti
+      confetti({
+        particleCount: 85,
+        spread: 90,
+        origin: { y: 0.5 },
+        colors: ['#fb7185', '#fbbf24', '#f43f5e', '#fff']
+      });
+
+      // 5. Reveal sweet wish note
+      setTimeout(() => {
+        wishRevealCard.classList.remove('hidden');
+        setTimeout(() => {
+          wishRevealCard.classList.remove('opacity-0', 'translate-y-4');
+          wishRevealCard.classList.add('opacity-100', 'translate-y-0');
+        }, 50);
+
+        candleInstruction.innerHTML = '<span class="text-champagne-300 font-medium">✨ Your wish has flown straight to heaven, my wife! 🕯️</span>';
+        lucide.createIcons();
+      }, 400);
+    }
+
+    function relightCandle() {
+      candleBlown = false;
+      candleSmoke.classList.add('hidden');
+
+      candleFlame.style.opacity = '1';
+      candleFlame.style.transform = 'scale(1)';
+      candleFlame.classList.add('flame-active');
+
+      const candleTapHint = document.getElementById('candleTapHint');
+      const blowCandleBtn = document.getElementById('blowCandleBtn');
+      if (candleTapHint) candleTapHint.classList.remove('hidden');
+      if (blowCandleBtn) {
+        blowCandleBtn.classList.remove('opacity-50', 'pointer-events-none');
+        blowCandleBtn.innerHTML = '<span>👆 Tap Here to Blow Candle & Make Wish</span><span>🕯️✨</span>';
+      }
+
+      wishRevealCard.classList.add('opacity-0', 'translate-y-4');
+      setTimeout(() => {
+        wishRevealCard.classList.add('hidden');
+      }, 500);
+
+      candleInstruction.innerHTML = '<span>Tap the candle flame to make a wish & blow it out! 🕯️</span>';
+    }
+
+
+    // ----------------------------------------------------
+    // STAGE 4: FLIP CARDS INTERACTION
+    // ----------------------------------------------------
+    function toggleCardFlip(cardEl) {
+      cardEl.classList.toggle('flipped');
+    }
+
+
+    // ----------------------------------------------------
+    // STAGE 5: LOVE SHOWER BUTTON
+    // ----------------------------------------------------
+    function triggerLoveShower() {
+      playWishChime();
+
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { y: 0.75 },
+        colors: ['#e11d48', '#fb7185', '#d4af37', '#ffffff']
+      });
+
+      // Spawn extra floating hearts on screen
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          spawnHeart(
+            Math.random() * window.innerWidth,
+            window.innerHeight - 50 + (Math.random() * 40)
+          );
+        }, i * 60);
+      }
+    }
+
+
+    // ----------------------------------------------------
+    // VIDEO SURPRISE MODAL LOGIC
+    // ----------------------------------------------------
+    function openVideoModal(videoSrc, title) {
+      const modal = document.getElementById('videoModal');
+      const player = document.getElementById('modalVideoPlayer');
+      const titleEl = document.getElementById('videoModalTitle');
+      if (modal && player) {
+        player.src = videoSrc;
+        if (titleEl) titleEl.textContent = title;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        // Temporarily pause background song while watching video
+        if (isMusicPlaying) {
+          bgMusic.pause();
+        }
+        player.play().catch(() => { });
+      }
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const player = document.getElementById('modalVideoPlayer');
+      if (modal && player) {
+        player.pause();
+        player.src = '';
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        // Resume background song if it was playing
+        if (isMusicPlaying) {
+          bgMusic.play().catch(() => { });
+        }
+      }
+    }
+
+
+    // ----------------------------------------------------
+    // STAGE 6: BACKGROUND FLOATING HEARTS CANVAS
+    // ----------------------------------------------------
+    const canvas = document.getElementById('heartsCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let hearts = [];
+    const maxHearts = 35;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class FloatingHeart {
+      constructor(x, y, isBurst = false) {
+        this.reset(x, y, isBurst);
+      }
+
+      reset(x, y, isBurst = false) {
+        this.x = x !== undefined ? x : Math.random() * canvas.width;
+        this.y = y !== undefined ? y : canvas.height + Math.random() * 40;
+        this.size = Math.random() * 14 + 10;
+        this.speedY = isBurst ? -(Math.random() * 4 + 2) : (Math.random() * 0.9 + 0.4);
+        this.speedX = isBurst ? (Math.random() - 0.5) * 4 : 0;
+        this.opacity = isBurst ? 0.9 : (Math.random() * 0.5 + 0.2);
+        this.fadeSpeed = isBurst ? 0.015 : 0.002;
+        this.swing = Math.random() * 2 + 1;
+        this.swingOffset = Math.random() * 10;
+        this.color = ['#fb7185', '#f43f5e', '#e11d48', '#fbcfe8', '#fef08a'][Math.floor(Math.random() * 5)];
+      }
+
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX + Math.sin((this.y / 35) + this.swingOffset) * (this.swing * 0.4);
+
+        if (this.speedX !== 0) {
+          this.speedX *= 0.98;
+        }
+
+        if (this.y < -30 || this.opacity <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 8;
+
+        ctx.translate(this.x, this.y);
+        ctx.beginPath();
+        const topCurveHeight = this.size * 0.3;
+        ctx.moveTo(0, topCurveHeight);
+
+        // Heart Bezier Curve
+        ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+        ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, (this.size + topCurveHeight) / 1.5, 0, this.size);
+        ctx.bezierCurveTo(0, (this.size + topCurveHeight) / 1.5, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+        ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Initialize floating hearts
+    for (let i = 0; i < maxHearts; i++) {
+      hearts.push(new FloatingHeart(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
+
+    function spawnHeart(x, y) {
+      if (hearts.length > 70) hearts.shift();
+      hearts.push(new FloatingHeart(x, y, true));
+    }
+
+    // Tap/Click to spawn gentle hearts at finger position
+    window.addEventListener('click', (e) => {
+      // Don't trigger if clicked on buttons or links
+      if (e.target.closest('button, a, input, select')) return;
+      for (let i = 0; i < 4; i++) {
+        spawnHeart(e.clientX + (Math.random() - 0.5) * 30, e.clientY + (Math.random() - 0.5) * 30);
+      }
+    });
+
+    // Main animation loop
+    function animateHearts() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hearts.forEach(heart => {
+        heart.update();
+        heart.draw();
+      });
+      requestAnimationFrame(animateHearts);
+    }
+    animateHearts();
+
+  </script>
+</body>
+
+</html>
