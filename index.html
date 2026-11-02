@@ -277,6 +277,77 @@
       background: #e11d48;
       border-radius: 3px;
     }
+
+    /* ---- STAR SKY ---- */
+    #starCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---- COUNTDOWN DIGITS ---- */
+    .countdown-box {
+      background: rgba(24,10,18,0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(251,113,133,0.3);
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      min-width: 62px;
+      text-align: center;
+    }
+
+    /* ---- PASSWORD LOCK ---- */
+    @keyframes wrongShake {
+      0%,100%{ transform: translateX(0); }
+      20%{ transform: translateX(-8px); }
+      40%{ transform: translateX(8px); }
+      60%{ transform: translateX(-6px); }
+      80%{ transform: translateX(6px); }
+    }
+    .shake-anim { animation: wrongShake 0.45s ease; }
+
+    /* ---- TIMELINE LINE ---- */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #e11d48, #fbbf24, #e11d48);
+      transform: translateX(-50%);
+      opacity: 0.5;
+    }
+
+    /* ---- LOVE STORY CARD ---- */
+    .story-card-left  { margin-right: 55%; }
+    .story-card-right { margin-left:  55%; }
+
+    @media (max-width: 480px) {
+      .story-card-left,
+      .story-card-right {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .timeline-line { left: 16px; }
+      .story-dot { left: 10px !important; right: auto !important; transform: none !important; }
+    }
+
+    /* Pulsing dot on timeline */
+    @keyframes dotPulse {
+      0%,100%{ box-shadow: 0 0 0 0 rgba(225,29,72,0.6); }
+      50%{ box-shadow: 0 0 0 8px rgba(225,29,72,0); }
+    }
+    .dot-pulse { animation: dotPulse 1.8s ease-in-out infinite; }
+
+    /* entrance animation for sections */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal-section {
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+    }
   </style>
 </head>
 
@@ -286,6 +357,7 @@
   <!-- BACKGROUND FLOATING HEARTS CANVAS -->
   <!-- ========================================== -->
   <canvas id="heartsCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <canvas id="starCanvas"></canvas>
 
   <!-- Background Ambient Glow Orbs -->
   <div
@@ -493,6 +565,51 @@
   <!-- ========================================== -->
   <main id="mainContent"
     class="opacity-0 transition-opacity duration-1000 relative z-10 max-w-4xl mx-auto px-4 py-8 sm:py-16 space-y-20 md:space-y-28">
+
+    <!-- ========================================== -->
+    <!-- BIRTHDAY COUNTDOWN TIMER (TOP)             -->
+    <!-- ========================================== -->
+    <section id="countdownSection" class="relative pt-2 pb-2 px-4 sm:px-6 overflow-hidden">
+      <div class="max-w-lg mx-auto text-center">
+
+        <div class="flex justify-center mb-4">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold tracking-wide animate-pulse">
+            ⏰ Birthday Countdown
+          </span>
+        </div>
+
+        <h2 class="font-display text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-2">
+          🎂 3rd November Tak Ka Safar 🎂
+        </h2>
+        <p class="font-script text-lg text-rose-300/70 mb-6">Har second aapke aur mere dil ke beech ki doori kam ho rahi hai...</p>
+
+        <div id="countdownWrapper" class="flex justify-center gap-3 sm:gap-5 flex-wrap">
+          <div class="countdown-box">
+            <div id="cdDays" class="font-display text-3xl sm:text-4xl text-champagne-200 font-bold">00</div>
+            <div class="text-[10px] text-rose-400/70 uppercase tracking-widest mt-1">Din</div>
+          </div>
+          <div class="countdown-box">
+            <div id="cdHours" class="font-display text-3xl sm:text-4xl text-rose-300 font-bold">00</div>
+            <div class="text-[10px] text-rose-400/70 uppercase tracking-widest mt-1">Ghante</div>
+          </div>
+          <div class="countdown-box">
+            <div id="cdMins" class="font-display text-3xl sm:text-4xl text-champagne-300 font-bold">00</div>
+            <div class="text-[10px] text-rose-400/70 uppercase tracking-widest mt-1">Minute</div>
+          </div>
+          <div class="countdown-box">
+            <div id="cdSecs" class="font-display text-3xl sm:text-4xl text-rose-400 font-bold">00</div>
+            <div class="text-[10px] text-rose-400/70 uppercase tracking-widest mt-1">Second</div>
+          </div>
+        </div>
+
+        <!-- Birthday arrived message (hidden until timer hits 0) -->
+        <div id="birthdayArrived" class="hidden mt-6 glass-card-bright rounded-3xl p-6 border border-champagne-400/30">
+          <p class="font-display text-2xl text-champagne-200 animate-bounce mb-2">🎉 Happy Birthday Meri Jaan! 🎉</p>
+          <p class="font-script text-xl text-rose-300">Aaj aapka din hai — aur aap meri poori duniya hain! ❤️</p>
+        </div>
+
+      </div>
+    </section>
 
     <!-- ========================================== -->
     <!-- STAGE 2: HERO & PHOTO SHOWCASE -->
@@ -1330,6 +1447,232 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- SECTION B: LOVE SHAYARI                    -->
+    <!-- ========================================== -->
+    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.2s">
+      <div class="max-w-lg mx-auto">
+
+        <div class="flex justify-center mb-5">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold tracking-wide">
+            🌹 Aapke Liye Shayari
+          </span>
+        </div>
+
+        <h2 class="font-display text-2xl sm:text-3xl text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-8">
+          Dil Ki Baat — Sirf Aapke Liye 💌
+        </h2>
+
+        <!-- Shayari Cards -->
+        <div class="space-y-5">
+
+          <div class="glass-card-bright rounded-2xl p-6 border border-champagne-400/25 text-center relative overflow-hidden">
+            <span class="absolute top-2 left-3 text-rose-400/20 text-5xl font-serif select-none">"</span>
+            <p class="font-script text-xl sm:text-2xl text-rose-200 leading-relaxed relative z-10">
+              Aap meri aankhon mein aasman ho,<br>
+              Aap meri zindagi ka armaan ho,<br>
+              Jis pal aap muskurati hain meri jaan,<br>
+              Lagta hai poora jahaan mera aapke naam ho. 🌹
+            </p>
+            <span class="absolute bottom-2 right-3 text-rose-400/20 text-5xl font-serif select-none rotate-180">"</span>
+          </div>
+
+          <div class="glass-card-bright rounded-2xl p-6 border border-champagne-400/25 text-center relative overflow-hidden">
+            <span class="absolute top-2 left-3 text-champagne-400/20 text-5xl font-serif select-none">"</span>
+            <p class="font-script text-xl sm:text-2xl text-champagne-200 leading-relaxed relative z-10">
+              Tujhse mohabbat karna seekha hai,<br>
+              Tujhse hi jeena seekha hai,<br>
+              Teri har khushi meri dua hai meri jaan,<br>
+              Har janm mein sirf tujhe maangna seekha hai. 💝
+            </p>
+            <span class="absolute bottom-2 right-3 text-champagne-400/20 text-5xl font-serif select-none rotate-180">"</span>
+          </div>
+
+          <div class="glass-card-bright rounded-2xl p-6 border border-rose-400/25 text-center relative overflow-hidden">
+            <span class="absolute top-2 left-3 text-rose-300/20 text-5xl font-serif select-none">"</span>
+            <p class="font-script text-xl sm:text-2xl text-rose-100 leading-relaxed relative z-10">
+              Aaj aapka janmdin hai meri pyaari,<br>
+              Khuda ne bheji hai ye lamha bahut hi pyaari,<br>
+              Meri dua hai ki aap hamesha muskaati rahein,<br>
+              Kyunki aapki khushi hi hai meri zindagaani. ✨
+            </p>
+            <span class="absolute bottom-2 right-3 text-rose-300/20 text-5xl font-serif select-none rotate-180">"</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION C: OUR LOVE STORY TIMELINE         -->
+    <!-- ========================================== -->
+    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.15s">
+      <div class="max-w-xl mx-auto">
+
+        <div class="flex justify-center mb-5">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold tracking-wide">
+            📅 Hamare Pal
+          </span>
+        </div>
+
+        <h2 class="font-display text-2xl sm:text-3xl text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-2">
+          Hamari Love Story 💞
+        </h2>
+        <p class="font-script text-lg text-center text-rose-300/70 mb-10">
+          Har pal ek yaad, har yaad ek tohfa...
+        </p>
+
+        <!-- Timeline Container -->
+        <div class="relative">
+          <div class="timeline-line"></div>
+
+          <!-- Event 1 -->
+          <div class="relative mb-10">
+            <div class="story-card-left glass-card rounded-xl p-4 border border-rose-500/30 shadow-glow-rose text-right sm:text-right text-left">
+              <p class="text-champagne-300 font-display text-sm mb-1">Pehli Mulaqaat 💫</p>
+              <p class="font-script text-rose-200 text-base">Jab pehli baar aapko dekha, dil ne kaha — yahi hai woh...</p>
+            </div>
+            <div class="story-dot absolute left-1/2 top-4 -translate-x-1/2 w-4 h-4 rounded-full bg-rose-500 border-2 border-rose-300 dot-pulse z-10 hidden sm:block"></div>
+          </div>
+
+          <!-- Event 2 -->
+          <div class="relative mb-10">
+            <div class="story-card-right glass-card rounded-xl p-4 border border-champagne-400/30 shadow-glow-gold">
+              <p class="text-champagne-300 font-display text-sm mb-1">Pehla Pyaar Ka Ehsaas 💕</p>
+              <p class="font-script text-rose-200 text-base">Aapke bina ek pal bhi mushkil ho gaya tha...</p>
+            </div>
+            <div class="story-dot absolute left-1/2 top-4 -translate-x-1/2 w-4 h-4 rounded-full bg-champagne-400 border-2 border-champagne-200 dot-pulse z-10 hidden sm:block"></div>
+          </div>
+
+          <!-- Event 3 -->
+          <div class="relative mb-10">
+            <div class="story-card-left glass-card rounded-xl p-4 border border-rose-500/30 shadow-glow-rose text-right sm:text-right text-left">
+              <p class="text-champagne-300 font-display text-sm mb-1">Hamaari Shaadi 💍</p>
+              <p class="font-script text-rose-200 text-base">Woh lamha jab aap meri wife ban gain — sabse khoobsurat din!</p>
+            </div>
+            <div class="story-dot absolute left-1/2 top-4 -translate-x-1/2 w-4 h-4 rounded-full bg-rose-500 border-2 border-rose-300 dot-pulse z-10 hidden sm:block"></div>
+          </div>
+
+          <!-- Event 4 -->
+          <div class="relative mb-10">
+            <div class="story-card-right glass-card rounded-xl p-4 border border-champagne-400/30 shadow-glow-gold">
+              <p class="text-champagne-300 font-display text-sm mb-1">Aaj Ka Din 🎂</p>
+              <p class="font-script text-rose-200 text-base">Happy Birthday Meri Jaan — aaj aur hamesha aapka din! ❤️</p>
+            </div>
+            <div class="story-dot absolute left-1/2 top-4 -translate-x-1/2 w-4 h-4 rounded-full bg-champagne-400 border-2 border-champagne-200 dot-pulse z-10 hidden sm:block"></div>
+          </div>
+
+          <!-- Event 5 — Future -->
+          <div class="relative">
+            <div class="story-card-left glass-card-bright rounded-xl p-4 border border-rose-400/30 text-right sm:text-right text-left">
+              <p class="text-champagne-300 font-display text-sm mb-1">Hamesha Ke Liye ♾️</p>
+              <p class="font-script text-rose-200 text-base">Har agli janm mein bhi sirf aapko hi chununga... 🌹</p>
+            </div>
+            <div class="story-dot absolute left-1/2 top-4 -translate-x-1/2 w-5 h-5 rounded-full bg-gradient-to-r from-rose-500 to-champagne-400 border-2 border-white/50 dot-pulse z-10 hidden sm:block"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION D: SECRET MESSAGE (PASSWORD LOCK)  -->
+    <!-- ========================================== -->
+    <section class="relative py-14 px-4 sm:px-6 overflow-hidden reveal-section" style="animation-delay:0.05s">
+      <div class="max-w-md mx-auto text-center">
+
+        <div class="flex justify-center mb-5">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold tracking-wide animate-pulse">
+            🔒 Ek Raaz Aapke Liye
+          </span>
+        </div>
+
+        <h2 class="font-display text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-2">
+          Secret Message For You 💌
+        </h2>
+        <p class="font-script text-lg text-rose-300/70 mb-8">
+          Ek khaas message aapke liye chhupa ke rakha hai... password daalo aur kholo! 🔐
+        </p>
+
+        <!-- Lock Box -->
+        <div id="lockBox" class="glass-card rounded-3xl p-7 border border-rose-500/40 shadow-glow-rose">
+          <div class="text-5xl mb-4" id="lockIcon">🔒</div>
+          <p class="text-rose-200/80 text-sm mb-5">Password daalo aur andar aao, meri jaan 💕</p>
+          <div class="flex gap-2 mb-4">
+            <input
+              id="pwInput"
+              type="password"
+              placeholder="Password yahan likho..."
+              autocomplete="off"
+              class="flex-1 bg-rose-950/60 border border-rose-500/40 rounded-xl px-4 py-3 text-rose-100 text-sm placeholder-rose-400/50 focus:outline-none focus:border-champagne-400/70 focus:ring-1 focus:ring-champagne-400/30 transition-all"
+            >
+            <button onclick="checkPassword()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold text-sm shadow-glow-rose active:scale-95 transition-transform touch-manipulation">
+              ✓
+            </button>
+          </div>
+          <p id="pwError" class="text-red-400 text-xs hidden">❌ Galat password! Dobara try karo meri jaan 😄</p>
+          <p class="text-rose-400/40 text-xs mt-3">💡 Hint: Tum kaun ho? 😊</p>
+        </div>
+
+        <!-- Unlocked Secret Message (hidden until correct password) -->
+        <div id="secretMsg" class="hidden glass-card-bright rounded-3xl p-7 border border-champagne-400/40 shadow-glow-gold text-center">
+          <div class="text-4xl mb-3 animate-bounce">💝</div>
+          <p class="font-display text-champagne-200 text-lg mb-4">Aapne sahi password daala — Kyunki aap hi meri wife hain! 💍</p>
+          <div class="space-y-3 text-rose-100/90 text-sm leading-relaxed font-sans">
+            <p>Meri pyaari jaan,</p>
+            <p>
+              Ye message maine sirf aapke liye chhupa ke rakha tha — kyunki kuch baatein sirf hamare beech ki hoti hain.
+              Aap meri sabse pyaari dost, meri wife, meri poori duniya hain.
+            </p>
+            <p>
+              Jab bhi aap thak jaayein, jab bhi mushkilein aayein — yaad rakhna ki main hamesha aapke saath hoon.
+              <strong class="text-champagne-200">Aapke bina main adhoora hoon.</strong>
+            </p>
+            <p class="font-script text-xl text-rose-300 mt-4">
+              Happy Birthday meri jaan — aaj, kal, aur hamesha. ❤️🌹
+            </p>
+            <p class="text-xs text-rose-400/60 mt-3">— Tumhara Apna, Your Husband 💍</p>
+          </div>
+          <button onclick="relockMessage()" class="mt-5 text-xs text-rose-400/50 underline touch-manipulation">🔒 Wapas lock karo</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION E: WHATSAPP REPLY BUTTON           -->
+    <!-- ========================================== -->
+    <section class="relative py-10 px-4 sm:px-6 reveal-section" style="animation-delay:0.1s">
+      <div class="max-w-md mx-auto text-center">
+
+        <div class="flex justify-center mb-5">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-950/80 border border-champagne-400/40 text-champagne-300 text-xs font-semibold tracking-wide">
+            💬 Direct Message
+          </span>
+        </div>
+
+        <h2 class="font-display text-xl sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-champagne-200 to-rose-400 mb-2">
+          Kaisa Laga Surprise? 😊
+        </h2>
+        <p class="font-script text-lg text-rose-300/70 mb-7">
+          Ek tap karke seedha mujhe pyara sa reply bhejo... 💕
+        </p>
+
+        <a
+          id="waBtn"
+          href="#"
+          onclick="openWhatsApp(event)"
+          class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-bold text-base shadow-lg active:scale-95 transition-all duration-200 touch-manipulation border border-green-400/30"
+        >
+          <svg viewBox="0 0 24 24" class="w-6 h-6 fill-white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.054 23.25a.75.75 0 00.916.917l5.453-1.492A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.96-1.356l-.357-.211-3.685 1.008 1.02-3.585-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          💌 Apne Husband Ko Pyaar Bhejo ❤️
+        </a>
+
+        <p class="text-rose-400/40 text-xs mt-4">Ek click mein WhatsApp par message bhej sakein 😊</p>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
     <!-- FOOTER -->
     <!-- ========================================== -->
     <footer class="pt-8 pb-16 text-center border-t border-rose-900/40">
@@ -1944,6 +2287,151 @@
       requestAnimationFrame(animateHearts);
     }
     animateHearts();
+
+
+    // ============================================
+    // STAR SKY BACKGROUND
+    // ============================================
+    (function() {
+      const sc = document.getElementById('starCanvas');
+      if (!sc) return;
+      const sctx = sc.getContext('2d');
+      let stars = [];
+      function resizeStar() {
+        sc.width = window.innerWidth;
+        sc.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeStar);
+      resizeStar();
+      for (let i = 0; i < 130; i++) {
+        stars.push({
+          x: Math.random() * sc.width,
+          y: Math.random() * sc.height,
+          r: Math.random() * 1.3 + 0.2,
+          alpha: Math.random(),
+          speed: Math.random() * 0.008 + 0.003,
+          dir: Math.random() > 0.5 ? 1 : -1
+        });
+      }
+      function drawStars() {
+        sctx.clearRect(0, 0, sc.width, sc.height);
+        stars.forEach(s => {
+          s.alpha += s.speed * s.dir;
+          if (s.alpha > 1 || s.alpha < 0.05) s.dir *= -1;
+          sctx.save();
+          sctx.globalAlpha = Math.max(0.05, s.alpha * 0.6);
+          sctx.fillStyle = Math.random() > 0.9 ? '#fde68a' : '#ffffff';
+          sctx.shadowColor = '#ffffff';
+          sctx.shadowBlur = 4;
+          sctx.beginPath();
+          sctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          sctx.fill();
+          sctx.restore();
+        });
+        requestAnimationFrame(drawStars);
+      }
+      drawStars();
+    })();
+
+
+    // ============================================
+    // BIRTHDAY COUNTDOWN TIMER
+    // ============================================
+    function updateCountdown() {
+      const now = new Date();
+      // Birthday: 3rd November of current year (or next if already passed)
+      let bday = new Date(now.getFullYear(), 10, 3, 0, 0, 0); // Month 10 = November
+      if (now >= bday) {
+        // Birthday is today or passed this year — show celebration
+        document.getElementById('countdownWrapper').classList.add('hidden');
+        document.getElementById('birthdayArrived').classList.remove('hidden');
+        // Fire celebration confetti
+        confetti({ particleCount: 150, spread: 120, origin: { y: 0.6 }, colors: ['#e11d48','#fb7185','#fbbf24','#ffffff'] });
+        return;
+      }
+      const diff = bday - now;
+      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById('cdDays').textContent  = String(days).padStart(2,'0');
+      document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cdMins').textContent  = String(mins).padStart(2,'0');
+      document.getElementById('cdSecs').textContent  = String(secs).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+
+    // ============================================
+    // PASSWORD LOCK — Secret Message
+    // ============================================
+    const CORRECT_PASSWORD = 'mywife';
+
+    function checkPassword() {
+      const input = document.getElementById('pwInput');
+      const errEl = document.getElementById('pwError');
+      const val = input.value.trim().toLowerCase();
+      if (val === CORRECT_PASSWORD) {
+        document.getElementById('lockBox').classList.add('hidden');
+        const msg = document.getElementById('secretMsg');
+        msg.classList.remove('hidden');
+        // Celebration burst
+        confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 }, colors: ['#e11d48','#fbbf24','#ffffff','#fb7185'] });
+        playWishChime();
+      } else {
+        errEl.classList.remove('hidden');
+        input.classList.add('shake-anim');
+        setTimeout(() => {
+          input.classList.remove('shake-anim');
+          errEl.classList.add('hidden');
+          input.value = '';
+        }, 1500);
+      }
+    }
+
+    // Allow Enter key to submit password
+    document.getElementById('pwInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+
+    function relockMessage() {
+      document.getElementById('secretMsg').classList.add('hidden');
+      document.getElementById('lockBox').classList.remove('hidden');
+      document.getElementById('pwInput').value = '';
+    }
+
+
+    // ============================================
+    // WHATSAPP BUTTON — Open with pre-filled message from Wife to Husband
+    // ============================================
+    function openWhatsApp(e) {
+      e.preventDefault();
+      const msg = encodeURIComponent('Aww thank you so much meri jaan! 😭❤️ Ye surprise dekh kar mera dil khush ho gaya! Aap sach mein duniya ke sabse acche husband ho... I love you so much forever! 💍✨🌹');
+      window.open('https://wa.me/917518595407?text=' + msg, '_blank');
+    }
+
+
+    // ============================================
+    // REVEAL SECTIONS ON SCROLL (Intersection Observer)
+    // ============================================
+    const revealEls = document.querySelectorAll('.reveal-section');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => {
+        el.style.animationPlayState = 'paused';
+        io.observe(el);
+      });
+    } else {
+      revealEls.forEach(el => el.style.opacity = '1');
+    }
 
   </script>
 </body>
